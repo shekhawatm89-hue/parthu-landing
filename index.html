@@ -282,6 +282,36 @@
     @keyframes markPop { 0% { opacity: 0; transform: scale(.3) rotate(-20deg); } 70% { transform: scale(1.15); } 100% { opacity: 1; transform: none; } }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
+  <script>
+    // Tracking config. Paste the IDs here; anything left empty is simply not loaded.
+    // META_PIXEL_ID: Events Manager > Data sources > your Pixel/Dataset ID (digits only).
+    // GA4_ID: Google Analytics > Admin > Data streams > Measurement ID (G-XXXXXXX).
+    window.PARTHU_TRACKING = { META_PIXEL_ID: '', GA4_ID: '' };
+  </script>
+  <script>
+    (function () {
+      var cfg = window.PARTHU_TRACKING;
+      if (cfg.META_PIXEL_ID) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', cfg.META_PIXEL_ID);
+        fbq('track', 'PageView');
+      }
+      if (cfg.GA4_ID) {
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=' + cfg.GA4_ID;
+        document.head.appendChild(g);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', cfg.GA4_ID);
+      }
+    })();
+  </script>
 </head>
 <body>
   <!--
@@ -489,7 +519,63 @@
         cmd(muted ? 'mute' : 'unMute');
         label.textContent = muted ? 'Tap for sound' : 'Sound on';
         btn.setAttribute('aria-label', muted ? 'Turn sound on' : 'Turn sound off');
+        if (!muted) sendEvent('VideoSoundOn', null, 'video_sound_on');
       });
+
+      // Tracking. Send an event to Meta and GA4 (each only if loaded).
+      function sendEvent(metaEvent, metaStandard, gaEvent, params) {
+        params = params || {};
+        if (window.fbq) fbq(metaStandard ? 'track' : 'trackCustom', metaStandard || metaEvent, params);
+        if (window.gtag) gtag('event', gaEvent, params);
+      }
+
+      // Remember where the visitor came from (ad UTMs), for 30 days, so it survives page reloads.
+      var src = {};
+      try {
+        var q = new URLSearchParams(location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'fbclid'].forEach(function (k) {
+          if (q.get(k)) src[k] = q.get(k);
+        });
+        if (Object.keys(src).length) localStorage.setItem('parthu_src', JSON.stringify({ t: Date.now(), v: src }));
+        else {
+          var saved = JSON.parse(localStorage.getItem('parthu_src') || 'null');
+          if (saved && Date.now() - saved.t < 30 * 864e5) src = saved.v;
+        }
+      } catch (e) {}
+
+      // WhatsApp buttons: fire a Contact event and add a short source tag to the prefilled message,
+      // so every WhatsApp lead shows which campaign/ad it came from. Log it in the lead sheet.
+      var ref = [src.utm_source, src.utm_campaign, src.utm_content].filter(Boolean).join('/') || 'direct';
+      [].slice.call(document.querySelectorAll('a.wa')).forEach(function (a) {
+        // Build the query by hand: wa.me wants %20 for spaces, not the '+' that URLSearchParams writes.
+        var url = new URL(a.href);
+        var text = url.searchParams.get('text') + ' (ref: ' + ref + ')';
+        a.href = url.origin + url.pathname + '?text=' + encodeURIComponent(text);
+        a.addEventListener('click', function () {
+          sendEvent('Contact', 'Contact', 'whatsapp_click', {
+            button: a.classList.contains('wa-big') ? 'cta_bottom' : 'header',
+            source: ref
+          });
+        });
+      });
+
+      // Engaged visitors: scrolled half the page, and reached the price section.
+      var halfSent = false;
+      addEventListener('scroll', function () {
+        if (halfSent) return;
+        var h = document.documentElement;
+        if ((h.scrollTop + innerHeight) / h.scrollHeight >= 0.5) {
+          halfSent = true;
+          sendEvent('ViewContent', 'ViewContent', 'scroll_50', { content_name: 'landing' });
+        }
+      }, { passive: true });
+      var priceEl = document.querySelector('[data-prices]');
+      if ('IntersectionObserver' in window) {
+        var po = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) { po.disconnect(); sendEvent('ViewPricing', null, 'view_pricing'); }
+        }, { threshold: 0.5 });
+        po.observe(priceEl);
+      }
     })();
   </script>
 </body>
