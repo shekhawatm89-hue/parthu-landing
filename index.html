@@ -395,7 +395,7 @@
     <section class="who" data-reveal>
       <div class="mono">FOR COACHING INSTITUTES</div>
       <p class="big">You already have a way of marking. You just don't have enough hours to apply it to every copy.</p>
-      <p class="exams">Class 9–12 · CA Foundation · CA Inter &amp; Final · UPSC · State PCS</p>
+      <p class="exams" id="examLine">Class 9–12 · CA Foundation · CA Inter &amp; Final · UPSC · State PCS</p>
     </section>
 
     <section class="steps">
@@ -414,11 +414,11 @@
       <div class="packs">
       <div class="pack">
         <div class="name"><b>Standard</b><span>Up to 300 students</span></div>
-        <span class="amt">₹<span data-count="100000" data-dur="1300">1,00,000</span></span>
+        <span class="amt"><span class="cur">₹</span><span data-count="100000" data-ae="5999" data-dur="1300">1,00,000</span></span>
       </div>
       <div class="pack dark">
         <div class="name"><b>Plus</b><span>Up to 500 students</span></div>
-        <span class="amt">₹<span data-count="150000" data-dur="1500">1,50,000</span></span>
+        <span class="amt"><span class="cur">₹</span><span data-count="150000" data-ae="8999" data-dur="1500">1,50,000</span></span>
       </div>
       </div>
       <p class="note">Over 500 students: price on the call. Only students whose copies are checked are counted.</p>
@@ -444,8 +444,31 @@
       var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
       var fmt = function (n) { return n.toLocaleString('en-IN'); };
 
-      // Exam ticker: repeat the list so the -50% loop is seamless.
+      // Region: UAE visitors see AED prices and a UAE exam list. Set by ?region=ae (UAE ads) or ?region=in,
+      // remembered on this device; otherwise guessed from a Gulf time zone.
+      var region = 'in';
+      try {
+        var rq = new URLSearchParams(location.search).get('region');
+        if (rq === 'ae' || rq === 'in') localStorage.setItem('parthu_region', rq);
+        region = rq || localStorage.getItem('parthu_region') || '';
+      } catch (e) {}
+      if (region !== 'ae' && region !== 'in') {
+        var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+        region = tz === 'Asia/Dubai' ? 'ae' : 'in';
+      }
       var exams = ['Class 9–12', 'CA Foundation', 'CA Intermediate', 'CA Final', 'UPSC', 'State PCS'];
+      if (region === 'ae') {
+        exams = ['CBSE Class 9–12', 'ACCA', 'CA Foundation', 'CA Inter & Final', 'ICSE / ISC'];
+        document.querySelector('.ticker').setAttribute('aria-label', exams.join(', '));
+        document.getElementById('examLine').textContent = 'CBSE Class 9–12 · ACCA · CA Foundation · CA Inter & Final · ICSE / ISC';
+        [].slice.call(document.querySelectorAll('[data-ae]')).forEach(function (n) {
+          n.dataset.count = n.dataset.ae;
+          n.textContent = fmt(+n.dataset.ae);
+          n.previousElementSibling.textContent = 'AED ';
+        });
+      }
+
+      // Exam ticker: repeat the list so the -50% loop is seamless.
       var track = document.querySelector('.ticker-track');
       for (var r = 0; r < 4; r++) exams.forEach(function (t) {
         var s = document.createElement('span'); s.textContent = t; track.appendChild(s);
@@ -453,7 +476,7 @@
 
       // Count-up numbers (hero copies, prices).
       function countUp(el, delay) {
-        var target = +el.dataset.count, dur = +(el.dataset.dur || 1300), step = target > 5000 ? 1000 : 1;
+        var target = +el.dataset.count, dur = +(el.dataset.dur || 1300), step = target > 5000 && target % 1000 === 0 ? 1000 : 1;
         if (reduced) { el.textContent = fmt(target); return; }
         el.textContent = '0';
         setTimeout(function () {
@@ -546,6 +569,7 @@
       // WhatsApp buttons: fire a Contact event and add a short source tag to the prefilled message,
       // so every WhatsApp lead shows which campaign/ad it came from. Log it in the lead sheet.
       var ref = [src.utm_source, src.utm_campaign, src.utm_content].filter(Boolean).join('/') || 'direct';
+      if (region === 'ae') ref += ', UAE';
       [].slice.call(document.querySelectorAll('a.wa')).forEach(function (a) {
         // Build the query by hand: wa.me wants %20 for spaces, not the '+' that URLSearchParams writes.
         var url = new URL(a.href);
@@ -554,7 +578,8 @@
         a.addEventListener('click', function () {
           sendEvent('Contact', 'Contact', 'whatsapp_click', {
             button: a.classList.contains('wa-big') ? 'cta_bottom' : 'header',
-            source: ref
+            source: ref,
+            region: region
           });
         });
       });
