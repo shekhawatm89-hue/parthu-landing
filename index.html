@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PARTHU.AI</title>
+  <title>PARTHU.AI | Every test copy checked against your marking scheme</title>
   <meta name="facebook-domain-verification" content="n83hiorvd490tt4mdqz0unt5befu5q" />
   <meta name="description" content="Your teacher writes the marking scheme. PARTHU checks every copy against it, the same way, every time. For coaching institutes: Class 9–12, CA, UPSC and State PCS.">
   <link rel="icon" href="assets/parthu-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Kalam:wght@400;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&family=IBM+Plex+Sans:wght@400;600&family=Kalam:wght@400;700&family=Montserrat:wght@700;800;900&display=swap">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&family=IBM+Plex+Sans:wght@400;600&family=Kalam:wght@400;700&family=Montserrat:wght@700;800;900&display=swap"></noscript>
   <style>
     :root {
       --navy: #0A1A44;
@@ -31,7 +33,10 @@
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
     body { margin: 0; background: var(--page); -webkit-font-smoothing: antialiased; }
-    a { color: var(--blue); }
+    a { color: var(--blue); text-underline-offset: .18em; }
+    ::selection { background: #cfe0ff; color: var(--navy); }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+    [hidden] { display: none !important; }
     p, h1, h2 { margin: 0; }
 
     .page {
@@ -40,7 +45,6 @@
       font-family: 'IBM Plex Sans', system-ui, sans-serif;
       box-shadow: 0 0 0 1px #e6ebf4;
     }
-    .mono { font: 600 12px var(--mono); color: var(--blue); letter-spacing: .04em; }
 
     /* Top bar */
     .top {
@@ -58,53 +62,36 @@
 
     /* WhatsApp buttons */
     .wa {
-      position: relative; overflow: hidden;
-      background: var(--cta); color: #fff; text-decoration: none;
-      animation: waPulse 2.2s ease-out infinite;
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      background: var(--blue); color: #fff; text-decoration: none;
+      transition: background-color .18s ease;
     }
-    .wa:hover, .wa:focus-visible { color: #fff; }
+    .wa:hover, .wa:focus-visible { background: #0f4fc0; color: #fff; }
+    .wa:active { background: #0c419f; }
     .wa:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
-    .wa-small {
-      font: 700 14px var(--head); padding: 0 16px; border-radius: 10px;
-      min-height: 44px; display: flex; align-items: center;
-    }
-    .wa-big {
-      display: block; font: 800 17px var(--head); padding: 19px;
-      border-radius: 12px; text-align: center;
-    }
-    .wa-big .label { position: relative; z-index: 1; }
-    .wa-big .shine {
-      position: absolute; top: 0; bottom: 0; left: 0; width: 30%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
-      animation: shimmer 3s ease-in-out infinite;
-    }
+    .wa svg { width: 1.2em; height: 1.2em; fill: currentColor; flex: none; }
+    .wa-small { font: 700 14px var(--head); padding: 0 14px; border-radius: 10px; min-height: 44px; }
+    .wa-big { font: 800 17px var(--head); padding: 19px; border-radius: 12px; text-align: center; }
 
     /* Hero */
     .hero { padding: 34px 20px 30px; display: flex; flex-direction: column; gap: 16px; }
-    .hero .count { font: 600 13px var(--mono); color: var(--blue); animation: fadeUp .6s ease both; }
-    h1 {
-      font: 800 35px/1.08 var(--head); letter-spacing: -.025em;
-      display: flex; flex-wrap: wrap; column-gap: .26em;
-    }
-    h1 span { display: inline-block; animation: wordUp .7s cubic-bezier(.2,.7,.2,1) both; }
-    h1 .em { color: var(--blue); }
-    .hero p { font-size: 17px; line-height: 1.5; color: var(--text-2); text-wrap: pretty; animation: fadeUp .7s ease 1.3s both; }
+    .hero .count { font: 600 13px var(--mono); color: var(--blue); font-variant-numeric: tabular-nums; }
+    h1 { font: 800 35px/1.08 var(--head); letter-spacing: -.025em; text-wrap: balance; }
+    h1 .em { color: var(--blue); display: block; }
+    .hero p { font-size: 17px; line-height: 1.5; color: var(--text-2); text-wrap: pretty; }
 
-    /* Exam ticker */
-    .ticker { overflow: hidden; background: var(--navy); padding: 12px 0; }
-    .ticker-track { display: flex; width: max-content; animation: ticker 22s linear infinite; }
-    .ticker-track span {
-      display: flex; align-items: center; gap: 18px; padding-right: 18px;
-      font: 700 14px var(--head); color: #fff; white-space: nowrap;
-    }
-    .ticker-track span::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--sky); }
+    /* Exams */
+    .ticker { background: var(--navy); padding: 13px 20px; }
+    .ticker-track { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 20px; margin: 0; padding: 0; list-style: none; }
+    .ticker-track li { font: 700 14px var(--head); color: #fff; white-space: nowrap; }
 
     /* Video */
     .video {
       position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 0;
-      background: repeating-linear-gradient(135deg, #f1f4fa 0 10px, #e7ecf5 10px 20px);
+      background: var(--navy);
       overflow: hidden;
     }
+    .video .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .video .tap {
       position: absolute; inset: 0; z-index: 2;
@@ -126,31 +113,32 @@
       box-shadow: 0 14px 34px -20px rgba(10,26,68,.45);
     }
     .card-head {
-      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2px 12px;
       padding: 12px 16px; background: var(--navy); color: #fff;
     }
-    .card-head .paper { font: 700 13px var(--head); }
-    .card-head .scheme { font: 600 12px var(--mono); color: #8fb4f5; }
+    .card-head .paper { font: 700 13px var(--head); white-space: nowrap; }
+    .card-head .scheme { font: 600 12px var(--mono); color: #8fb4f5; white-space: nowrap; }
     /* Ruled answer sheet with a red margin line */
     .sheet {
-      position: relative; padding: 14px 16px 14px 40px;
+      position: relative; padding: 0 16px 68px 40px;
       background-image: repeating-linear-gradient(to bottom, transparent 0 33px, #e3ebf7 33px 34px);
     }
     .sheet .margin { position: absolute; top: 0; bottom: 0; left: 28px; width: 1px; background: #f0b9b9; }
-    .sheet .q { font: 700 15px/1.4 var(--head); margin-bottom: 6px; }
+    .sheet .q { font: 700 15px/34px var(--head); }
     .line { display: flex; align-items: center; gap: 10px; min-height: 34px; }
-    .line .txt { flex: 1; position: relative; font: 400 18px/1.2 var(--hand); color: #1d2b55; }
+    .line .txt { flex: 1; position: relative; font: 400 18px/34px var(--hand); color: #1d2b55; }
     .line .ul {
       position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; border-radius: 2px;
       background: var(--blue); transition: width .5s ease;
     }
-    .line .m { width: 44px; text-align: right; font: 700 22px var(--hand); color: var(--blue); opacity: 0; }
+    .line .m { display: flex; align-items: center; justify-content: flex-end; gap: 3px; width: 54px; flex: none; font: 700 20px var(--hand); color: var(--blue); opacity: 0; }
+    .line .m svg { width: 17px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
     .line.half .ul { background: var(--amber); }
     .line.half .m { color: var(--amber); }
     .line.on .ul { width: 100%; }
     .line.on .m { opacity: 1; animation: markPop .45s cubic-bezier(.2,.8,.3,1.3) both; }
     .stamp {
-      position: absolute; right: 14px; bottom: 10px; width: 74px; height: 74px; border-radius: 50%;
+      position: absolute; right: 14px; bottom: 8px; width: 74px; height: 74px; border-radius: 50%;
       border: 3px solid var(--blue); display: flex; align-items: center; justify-content: center;
       transform: rotate(-12deg); font: 700 26px var(--hand); color: var(--blue);
       background: rgba(255,255,255,.85); opacity: 0;
@@ -168,39 +156,135 @@
     .score small { font-size: 16px; color: var(--muted); font-weight: 700; }
 
     /* Who it is for */
-    .who {
-      margin: 40px 20px 0; padding: 20px; background: var(--tint); border-radius: 14px;
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .who .big { font-size: 17px; line-height: 1.45; font-weight: 500; text-wrap: pretty; }
-    .who .exams { font-size: 14px; line-height: 1.5; color: var(--text-2); }
+    .who { margin: 40px 20px 0; padding: 22px 20px; background: var(--tint); border-radius: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .who .big { font-size: 18px; line-height: 1.45; color: var(--text-2); text-wrap: pretty; }
 
     /* Steps */
     .steps { padding: 40px 20px 0; display: flex; flex-direction: column; }
     h2 { font: 800 23px var(--head); letter-spacing: -.015em; }
     .steps h2 { margin-bottom: 14px; }
     .step {
-      display: grid; grid-template-columns: 62px 1fr; gap: 14px;
+      display: grid; grid-template-columns: 66px 1fr; gap: 14px;
       padding: 14px 0; border-top: 1px solid var(--line);
     }
     .step:last-child { border-bottom: 1px solid var(--line); }
-    .step .k { font: 600 12px var(--mono); color: var(--blue); padding-top: 4px; }
+    .step .k { font: 700 19px/1.2 var(--hand); color: var(--blue); }
     .step .v { font-size: 16px; line-height: 1.45; }
 
-    /* Price */
-    .price { padding: 44px 20px 0; display: flex; flex-direction: column; gap: 12px; }
-    .packs { display: flex; flex-direction: column; gap: 12px; }
-    .pack {
-      display: flex; justify-content: space-between; align-items: center; gap: 10px;
-      padding: 18px; border: 1px solid var(--line-2); border-radius: 14px;
+    /* Opening teacher quote */
+    .lead-quote { margin: 0; padding: 32px 20px 0; }
+    .lead-quote blockquote { margin: 0; font: 700 24px/1.3 var(--hand); color: var(--navy); text-wrap: pretty; }
+    .lead-quote figcaption { margin-top: 10px; font-size: 14px; line-height: 1.4; color: var(--muted); }
+    .lead-quote figcaption b { color: var(--navy); font-weight: 600; }
+
+    /* Video tile: a cover image until tapped, so the page stays fast */
+    .vid { position: relative; aspect-ratio: 16 / 9; background: #06112e; border-radius: 12px; overflow: hidden; }
+    .vid.tall { aspect-ratio: 9 / 16; }
+    .vid button { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+    .vid img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .voice.lit .vid { box-shadow: 0 0 0 2px var(--navy), 0 0 0 4px #7fb4ff; }
+    .vid { transition: box-shadow .4s ease; }
+    .vid .go {
+      position: absolute; left: 12px; bottom: 12px; display: flex; align-items: center; gap: 7px;
+      padding: 8px 12px 8px 10px; border-radius: 8px; background: #fff; color: var(--navy);
+      font: 700 13px var(--head); transition: background-color .18s ease;
     }
-    .pack.dark { background: var(--navy); color: #fff; border-color: var(--navy); }
-    .pack .name { display: flex; flex-direction: column; gap: 2px; }
-    .pack .name b { font: 700 16px var(--head); }
-    .pack .name span { font-size: 14px; color: var(--muted); }
-    .pack.dark .name span { color: #c9d4ea; }
-    .pack .amt { font: 800 27px var(--head); letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
-    .price .note { font-size: 14px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+    .vid .go svg { width: 12px; height: 14px; fill: var(--blue); }
+    .vid button:hover .go { background: var(--tint); }
+    .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    /* Text beside the videos and the report */
+    .sec-lead { font-size: 16px; line-height: 1.55; text-wrap: pretty; }
+    /* Teacher lines take turns in one spot. Stacked in one cell, so the page never jumps. */
+    .sec-quote { display: grid; }
+    .sec-quote figure {
+      grid-area: 1 / 1; margin: 0; opacity: 0; transform: translateY(10px); visibility: hidden;
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1), visibility 0s .7s;
+    }
+    .sec-quote figure.on { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+    .sec-quote blockquote { margin: 0; font: 700 23px/1.4 var(--hand); }
+    .sec-quote figcaption { margin-top: 4px; font-size: 14px; }
+
+    /* Teachers */
+    .teachers { margin-top: 48px; padding: 36px 0 38px; background: var(--navy); color: #fff; }
+    .teachers h2 { padding: 0 20px; text-wrap: balance; }
+    .teachers .sec-lead { margin-top: 12px; padding: 0 20px; color: #d5ddee; }
+    .teachers .sec-quote { margin-top: 18px; padding: 0 20px; }
+    .teachers .sec-quote blockquote { color: #fff; }
+    .teachers .sec-quote figcaption { color: #b9c6e4; }
+    .rail {
+      display: flex; gap: 14px; margin-top: 20px; padding: 0 20px 6px;
+      overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 20px;
+      scrollbar-width: none;
+    }
+    .rail::-webkit-scrollbar { display: none; }
+    .voice { flex: 0 0 84%; max-width: 340px; margin: 0; scroll-snap-align: start; }
+    .voice:only-child { flex-basis: 100%; max-width: none; }
+    .voice.tall, .voice.tall:only-child { flex: 0 0 62%; max-width: 240px; }
+    .voice blockquote { margin: 14px 0 0; font-size: 16px; line-height: 1.5; color: #e6ecfa; text-wrap: pretty; }
+    .voice figcaption { margin-top: 8px; font-size: 14px; line-height: 1.4; color: #b9c6e4; }
+    .voice figcaption b { display: block; color: #fff; font-weight: 600; }
+    .teachers .wa-big { margin: 24px 20px 0; }
+
+    /* Students: one ruled sheet rather than a grid of boxes */
+    .students { padding: 42px 20px 0; }
+    .students h2 { text-wrap: balance; }
+    .students .sec-lead { margin-top: 8px; color: var(--text-2); }
+    .students .rail { margin: 16px -20px 0; }
+    .students .voice figcaption { color: var(--muted); }
+    .students .voice figcaption b { color: var(--navy); }
+    .notes {
+      position: relative; margin: 18px 0 0; padding: 0 16px 0 40px; list-style: none;
+      border: 1px solid var(--line-2); border-radius: 14px; background-color: #fffefb;
+      background-image: repeating-linear-gradient(to bottom, transparent 0 33px, #e3ebf7 33px 34px);
+      box-shadow: 0 14px 34px -20px rgba(10,26,68,.45);
+    }
+    .notes::before { content: ""; position: absolute; top: 0; bottom: 0; left: 28px; width: 1px; background: #f0b9b9; }
+    .notes q { display: block; quotes: none; font: 400 19px/34px var(--hand); color: #1d2b55; }
+    .notes span { display: block; font-size: 14px; line-height: 34px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .notes span b { color: var(--navy); font-weight: 600; }
+
+    /* The offer: 5 copies on WhatsApp */
+    .offer { padding: 44px 20px 0; }
+    .offer h2 { text-wrap: balance; }
+    .offer .sec-lead { margin: 8px 0 16px; color: var(--text-2); }
+
+    /* The real report, rebuilt in HTML so it stays sharp. Names are hidden on purpose. */
+    .report {
+      margin: 28px 20px 0; border: 1px solid var(--line-2); border-radius: 16px; overflow: hidden; background: #fff;
+      box-shadow: 0 14px 34px -20px rgba(10,26,68,.45);
+    }
+    .r-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; background: var(--navy); color: #fff; }
+    .r-head b { font: 800 16px var(--head); }
+    .r-head span { font-size: 12px; line-height: 1.3; color: #c9d4ea; text-align: right; }
+    .r-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px; background: var(--tint); }
+    .r-who { min-width: 0; }
+    .r-who b { display: block; margin-bottom: 4px; font: 800 18px var(--head); }
+    .r-who span { display: block; font-size: 14px; line-height: 1.4; color: var(--text-2); }
+    .r-score { flex: none; text-align: center; }
+    .r-ring { position: relative; width: 84px; height: 84px; margin: 0 auto 4px; }
+    .r-ring svg { display: block; width: 100%; height: 100%; transform: rotate(-90deg); fill: none; stroke-width: 11; }
+    .r-ring circle:first-child { stroke: #e3e9f5; }
+    .r-ring circle:last-child { stroke: var(--blue); }
+    .r-ring b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 800 25px var(--head); font-variant-numeric: tabular-nums; }
+    .r-ring b small { font-size: 12px; font-weight: 700; color: var(--muted); }
+    .r-score span { font-size: 12px; color: var(--muted); }
+    .r-qs { margin: 0; padding: 6px 16px; list-style: none; }
+    .r-qs li { display: grid; grid-template-columns: 30px 1fr 64px 32px; align-items: center; gap: 2px 8px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; }
+    .r-qs li:first-child { border-top: 0; }
+    .r-qs b { font: 800 14px var(--head); color: var(--blue); }
+    .r-qs i { display: block; height: 7px; border-radius: 4px; background: #1f8a58; }
+    .r-qs .zero i { background: #e6e1d8; }
+    .r-qs em { font-style: normal; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+    .r-qs small { grid-column: 2 / -1; font-size: 13px; color: #a15c00; }
+    .r-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 16px; }
+    .r-two div { padding: 12px; border-radius: 10px; background: #edf7f1; font-size: 13.5px; line-height: 1.4; color: var(--text-2); }
+    .r-two div + div { background: #fdf3e3; }
+    .r-two b { display: block; margin-bottom: 3px; font: 700 14px var(--head); color: #17744a; }
+    .r-two div + div b { color: #a15c00; }
+    .r-remark { margin: 14px 16px 0; font: 700 18px/1.3 var(--hand); color: var(--blue); }
+    .r-copy { display: block; width: 100%; height: auto; margin-top: 14px; border-top: 1px solid var(--line); }
+    .report figcaption { padding: 10px 16px 12px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.4; color: var(--muted); }
 
     .cta { padding: 26px 20px 0; display: flex; flex-direction: column; gap: 10px; }
     .cta .sub { text-align: center; font-size: 14px; color: var(--muted); }
@@ -230,13 +314,18 @@
       }
       .hero { grid-column: 2; grid-row: 1; padding: 0; gap: 22px; }
       .hero .count { font-size: 14px; }
-      h1 { font-size: 54px; }
+      h1 { font-size: 52px; }
       .hero p { font-size: 19px; max-width: 30em; }
       .media { grid-column: 4; grid-row: 1; }
       .video { border-radius: 16px; box-shadow: 0 24px 60px -30px rgba(10,26,68,.45); }
       .video-note { padding: 12px 0 0; }
-      .ticker { grid-column: 1 / -1; grid-row: 2; margin-top: 72px; padding: 16px 0; }
-      .ticker-track span { font-size: 16px; gap: 24px; padding-right: 24px; }
+      .ticker { grid-column: 1 / -1; grid-row: 2; margin-top: 72px; padding: 16px 32px; }
+      .ticker-track { gap: 6px 36px; }
+      .ticker-track li { font-size: 16px; }
+
+      .lead-quote { max-width: 1184px; margin: 0 auto; padding: 64px 32px 0; }
+      .lead-quote blockquote { font-size: 34px; max-width: 24em; }
+      .lead-quote figcaption { font-size: 16px; }
 
       /* Marking demo left (stays in view), who-it's-for and steps right */
       .how {
@@ -252,35 +341,45 @@
       .step { grid-template-columns: 80px 1fr; padding: 18px 0; }
       .step .v { font-size: 17px; }
 
+      .teachers { margin-top: 96px; padding: 72px 0; }
+      .teachers-in {
+        display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto auto auto auto 1fr;
+        column-gap: 56px; max-width: 1120px; margin: 0 auto; padding: 0 32px; box-sizing: content-box;
+      }
+      .teachers h2 { grid-column: 1; grid-row: 2; padding: 0; font-size: 32px; line-height: 1.15; }
+      .teachers .sec-lead { grid-column: 1; grid-row: 3; margin-top: 16px; padding: 0; font-size: 17px; }
+      .teachers .sec-quote { grid-column: 1; grid-row: 4; margin-top: 20px; padding: 0; }
+      .sec-quote blockquote { font-size: 25px; }
+      .rail { grid-column: 2; grid-row: 1 / -1; margin: 0; padding: 0; gap: 24px; overflow: visible; scroll-snap-type: none; }
+      .voice.tall, .voice.tall:only-child { flex: 0 0 230px; max-width: none; }
+      .voice:not(.tall) { flex: 1 1 0; max-width: none; min-width: 0; }
+      .teachers .wa-big { grid-column: 1; grid-row: 5; justify-self: start; margin: 26px 0 0; padding: 19px 22px; white-space: nowrap; }
+      .students {
+        display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto auto 1fr auto;
+        column-gap: 56px; max-width: 1120px; margin: 0 auto; padding: 88px 32px 0; box-sizing: content-box;
+      }
+      .students h2 { grid-column: 1; grid-row: 2; font-size: 32px; line-height: 1.15; }
+      .students .sec-lead { grid-column: 1; grid-row: 3; margin-top: 16px; font-size: 17px; }
+      .students .rail { grid-column: 2; grid-row: 1 / 5; margin: 0; padding: 0; }
+      .notes { grid-column: 1 / -1; grid-row: 5; columns: 3; column-gap: 44px; margin-top: 34px; padding: 0 28px 0 48px; }
+      .notes::before { left: 32px; }
+      .notes li { break-inside: avoid; }
+
       /* Prices side by side, button centred under them */
       .buy { padding: 96px 32px 0; }
-      .price { padding: 0; gap: 18px; text-align: center; }
-      .packs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
-      .pack { padding: 28px; }
-      .pack .name b { font-size: 19px; }
-      .pack .name span { font-size: 15px; }
-      .pack .amt { font-size: 36px; }
-      .price .note { font-size: 15px; }
-      .cta { max-width: 460px; margin: 0 auto; padding: 36px 0 0; }
+      .buy { display: grid; grid-template-columns: minmax(0, 1fr) 500px; grid-template-rows: 1fr auto auto 1fr; column-gap: 72px; }
+      .offer { grid-column: 1; grid-row: 2; padding: 0; }
+      .offer h2 { font-size: 38px; line-height: 1.15; }
+      .offer .sec-lead { margin: 14px 0 22px; font-size: 17px; }
+      .offer .step { padding: 16px 0; }
+      .report { grid-column: 2; grid-row: 1 / -1; margin: 0; }
+      .cta { grid-column: 1; grid-row: 3; padding: 28px 0 0; }
 
       footer { margin-top: 96px; padding: 40px 32px; }
       .foot-in { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; align-items: end; }
       .foot-in .tag { grid-column: 2; grid-row: 1 / span 2; margin: 0; }
     }
 
-    /* Scroll reveal: only hidden once JS has marked the page ready, so no-JS still shows everything */
-    .js [data-reveal] { transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
-    .js [data-reveal].pending { opacity: 0; transform: translateY(28px); }
-
-    @keyframes wordUp { from { opacity: 0; transform: translateY(.6em); } to { opacity: 1; transform: none; } }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-    @keyframes waPulse {
-      0% { box-shadow: 0 0 0 0 rgba(21,101,232,.5); }
-      70% { box-shadow: 0 0 0 14px rgba(21,101,232,0); }
-      100% { box-shadow: 0 0 0 0 rgba(21,101,232,0); }
-    }
-    @keyframes shimmer { 0% { transform: translateX(-150%) skewX(-20deg); } 55%, 100% { transform: translateX(350%) skewX(-20deg); } }
-    @keyframes ticker { to { transform: translateX(-50%); } }
     @keyframes stampPop { 0% { opacity: 0; transform: scale(.3) rotate(-32deg); } 70% { transform: scale(1.15) rotate(-12deg); } 100% { opacity: 1; transform: rotate(-12deg); } }
     @keyframes markPop { 0% { opacity: 0; transform: scale(.3) rotate(-20deg); } 70% { transform: scale(1.15); } 100% { opacity: 1; transform: none; } }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
@@ -292,7 +391,7 @@
     window.PARTHU_TRACKING = { META_PIXEL_ID: '1413870850721594', GA4_ID: 'G-YZKB07ZYRH' };
   </script>
   <script>
-    (function () {
+    function parthuTrackingBoot() {
       var cfg = window.PARTHU_TRACKING;
       if (cfg.META_PIXEL_ID) {
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -313,7 +412,8 @@
         gtag('js', new Date());
         gtag('config', cfg.GA4_ID);
       }
-    })();
+    }
+    addEventListener('load', function () { setTimeout(parthuTrackingBoot, 300); });
   </script>
 </head>
 <body>
@@ -321,6 +421,7 @@
     WhatsApp number: 919216652471 (91 + 9216652471). To change it, replace it in both hrefs below.
     Promo video: YouTube WNVaQFqKj3o. To change it, replace that ID in the iframe src (it appears twice).
   -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol><symbol id="i-tick" viewBox="0 0 17 15"><path d="M2 8.5 6.2 13 15 2"/></symbol><symbol id="i-play" viewBox="0 0 12 14"><path d="M1 1.2v11.6c0 .8.9 1.3 1.6.8l8.6-5.8c.6-.4.6-1.2 0-1.6L2.6.4C1.9-.1 1 .4 1 1.2z"/></symbol></svg>
   <div class="page">
 
     <header class="top">
@@ -329,60 +430,54 @@
         <img src="assets/parthu-mark.png" alt="">
         <span>PARTHU<b>.AI</b></span>
       </a>
-      <a class="wa wa-small" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20a%2020-minute%20demo%20of%20PARTHU%20for%20my%20institute." target="_blank" rel="noopener">WhatsApp us</a>
+      <a class="wa wa-small" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20a%2020-minute%20demo%20of%20PARTHU%20for%20my%20institute." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp us</a>
       </div>
     </header>
 
     <div class="intro">
     <section class="hero">
-      <div class="count">300 students × 4 tests = <span data-count="1200" data-delay="900" data-dur="1400">1,200</span> copies</div>
-      <h1>
-        <span style="animation-delay:.15s">Your</span>
-        <span style="animation-delay:.23s">teachers</span>
-        <span style="animation-delay:.31s">can't</span>
-        <span style="animation-delay:.39s">check</span>
-        <span style="animation-delay:.47s">them</span>
-        <span style="animation-delay:.55s">all.</span>
-        <span class="em" style="animation-delay:.8s">Now</span>
-        <span class="em" style="animation-delay:.88s">they</span>
-        <span class="em" style="animation-delay:.96s">don't</span>
-        <span class="em" style="animation-delay:1.04s">have</span>
-        <span class="em" style="animation-delay:1.12s">to.</span>
-      </h1>
-      <p>Your teacher writes the marking scheme. PARTHU checks every copy against it — the same way, every time.</p>
+      <div class="count">300 students × 4 tests = 1,200 copies</div>
+      <h1>Your teachers can't check them all. <span class="em">Now they don't have to.</span></h1>
+      <p>Your teacher writes the marking scheme. PARTHU checks every copy against it, the same way, every time.</p>
     </section>
 
-    <div class="ticker" aria-label="Class 9–12, CA Foundation, CA Intermediate, CA Final, UPSC, State PCS">
-      <div class="ticker-track" aria-hidden="true"></div>
+    <div class="ticker">
+      <ul class="ticker-track"></ul>
     </div>
 
     <div class="media">
     <figure class="video" id="promo">
+      <img class="poster" src="https://i.ytimg.com/vi/WNVaQFqKj3o/hqdefault.jpg" width="480" height="360" alt="">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/WNVaQFqKj3o?autoplay=1&amp;mute=1&amp;playsinline=1&amp;loop=1&amp;playlist=WNVaQFqKj3o&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;enablejsapi=1"
+        data-src="https://www.youtube-nocookie.com/embed/WNVaQFqKj3o?autoplay=1&amp;mute=1&amp;playsinline=1&amp;loop=1&amp;playlist=WNVaQFqKj3o&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;enablejsapi=1"
         title="PARTHU.AI promo video"
         allow="autoplay; encrypted-media; picture-in-picture"></iframe>
       <button class="tap" type="button" aria-label="Turn sound on"></button>
       <span class="sound">Tap for sound</span>
     </figure>
-    <p class="video-note">See an institute use it — 60 seconds.</p>
+    <p class="video-note">See an institute use it in 60 seconds.</p>
     </div>
     </div>
+
+    <figure class="lead-quote" id="leadQuote" hidden>
+      <blockquote></blockquote>
+      <figcaption></figcaption>
+    </figure>
 
     <div class="how">
 
-    <section class="demo" data-reveal>
+    <section class="demo">
       <h2 class="demo-title">Watch a copy get <span class="hand">checked</span></h2>
       <div class="card" id="markCard">
         <div class="card-head"><span class="paper">CA Foundation · Law · Q3</span><span class="scheme">Your scheme · 5 marks</span></div>
         <div class="sheet">
           <div class="margin"></div>
           <div class="q">Explain the doctrine of indoor management.</div>
-          <div class="line" data-pts="1"><span class="txt">Outsiders dealing with a company can assume<span class="ul"></span></span><span class="m">✓ +1</span></div>
-          <div class="line" data-pts="1"><span class="txt">internal procedures are duly followed.<span class="ul"></span></span><span class="m">✓ +1</span></div>
-          <div class="line" data-pts="1"><span class="txt">Based on Royal British Bank v Turquand.<span class="ul"></span></span><span class="m">✓ +1</span></div>
-          <div class="line" data-pts="1"><span class="txt">It protects third parties acting in good faith.<span class="ul"></span></span><span class="m">✓ +1</span></div>
-          <div class="line half" data-pts="0.5"><span class="txt">Some exceptions also apply.<span class="ul"></span></span><span class="m">~ +½</span></div>
+          <div class="line" data-pts="1"><span class="txt">Outsiders dealing with a company can assume<span class="ul"></span></span><span class="m"><svg aria-hidden="true"><use href="#i-tick"/></svg>+1</span></div>
+          <div class="line" data-pts="1"><span class="txt">internal procedures are duly followed.<span class="ul"></span></span><span class="m"><svg aria-hidden="true"><use href="#i-tick"/></svg>+1</span></div>
+          <div class="line" data-pts="1"><span class="txt">Based on Royal British Bank v Turquand.<span class="ul"></span></span><span class="m"><svg aria-hidden="true"><use href="#i-tick"/></svg>+1</span></div>
+          <div class="line" data-pts="1"><span class="txt">It protects third parties acting in good faith.<span class="ul"></span></span><span class="m"><svg aria-hidden="true"><use href="#i-tick"/></svg>+1</span></div>
+          <div class="line half" data-pts="0.5"><span class="txt">Some exceptions also apply.<span class="ul"></span></span><span class="m">+½</span></div>
           <div class="stamp">4½</div>
         </div>
         <div class="card-foot">
@@ -395,41 +490,82 @@
       </div>
     </section>
 
-    <section class="who" data-reveal>
-      <div class="mono">FOR COACHING INSTITUTES</div>
+    <section class="who">
+      <h2>For coaching institutes</h2>
       <p class="big">You already have a way of marking. You just don't have enough hours to apply it to every copy.</p>
-      <p class="exams" id="examLine">Class 9–12 · CA Foundation · CA Inter &amp; Final · UPSC · State PCS</p>
     </section>
 
     <section class="steps">
-      <h2 data-reveal>What changes for you</h2>
-      <div class="step" data-reveal data-delay="0"><span class="k">ONCE</span><span class="v">Your teacher shares the marking scheme.</span></div>
-      <div class="step" data-reveal data-delay="140"><span class="k">DAILY</span><span class="v">Students type answers or send a photo of their copy.</span></div>
-      <div class="step" data-reveal data-delay="280"><span class="k">EVERY</span><span class="v">Copy is checked against that scheme.</span></div>
-      <div class="step" data-reveal data-delay="420"><span class="k">YOU</span><span class="v">See scores, missed points and a report — for every student.</span></div>
+      <h2>What changes for you</h2>
+      <div class="step"><span class="k">ONCE</span><span class="v">Your teacher shares the marking scheme.</span></div>
+      <div class="step"><span class="k">DAILY</span><span class="v">Students type answers or send a photo of their copy.</span></div>
+      <div class="step"><span class="k">EVERY</span><span class="v">Copy is checked against that scheme.</span></div>
+      <div class="step"><span class="k">YOU</span><span class="v">See scores, missed points and a report for every student.</span></div>
     </section>
 
     </div>
 
-    <div class="buy">
-    <section class="price" data-reveal data-prices>
-      <h2>Price for 3 months</h2>
-      <div class="packs">
-      <div class="pack">
-        <div class="name"><b>Standard</b><span>Up to 300 students</span></div>
-        <span class="amt"><span class="cur">₹</span><span data-count="100000" data-ae="5999" data-dur="1300">1,00,000</span></span>
+    <section class="teachers" id="teachers" hidden>
+      <div class="teachers-in">
+        <h2>Copies back while the chapter is still fresh.</h2>
+        <p class="sec-lead">Deepesh Sir's copies used to take a week. By then the class was on the next chapter. Now his students see their mistakes the next day.</p>
+        <div class="sec-quote" id="teacherQuotes" hidden></div>
+        <div class="rail" id="teacherList"></div>
+        <a class="wa wa-big" data-where="after_teachers" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20to%20send%205%20copies%20from%20my%20institute%20and%20see%20the%20PARTHU%20report." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send 5 copies on WhatsApp</a>
       </div>
-      <div class="pack dark">
-        <div class="name"><b>Plus</b><span>Up to 500 students</span></div>
-        <span class="amt"><span class="cur">₹</span><span data-count="150000" data-ae="8999" data-dur="1500">1,50,000</span></span>
-      </div>
-      </div>
-      <p class="note">Over 500 students: price on the call. Only students whose copies are checked are counted.</p>
     </section>
 
-    <section class="cta" data-reveal>
-      <a class="wa wa-big" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20a%2020-minute%20demo%20of%20PARTHU%20for%20my%20institute." target="_blank" rel="noopener"><span class="label">Try it on one of your tests</span><span class="shine"></span></a>
-      <div class="sub">Free 20-minute demo · Opens WhatsApp</div>
+    <section class="students" id="students" hidden>
+      <h2>Marks alone don't show what went wrong.</h2>
+      <p class="sec-lead">Tisha used to get back only marks or a cross. Now she can see exactly what was missing, and she doesn't repeat the mistake.</p>
+      <div class="rail" id="studentVideos" hidden></div>
+      <ul class="notes" id="studentNotes" hidden></ul>
+    </section>
+
+    <div class="buy">
+    <section class="offer" data-offer>
+      <h2>Give us 5 copies. See the report.</h2>
+      <p class="sec-lead">Don't take our word for it. Send copies from one of your own tests and judge the report yourself. Checking these 5 copies is free.</p>
+      <div class="step"><span class="k">SNAP</span><span class="v">Take photos of 5 answer copies from any test.</span></div>
+      <div class="step"><span class="k">SEND</span><span class="v">Send them on WhatsApp with your marking scheme.</span></div>
+      <div class="step"><span class="k">SEE</span><span class="v">Get a report like this for each copy: marks by question, strengths, focus areas and corrections in red.</span></div>
+    </section>
+
+    <figure class="report">
+      <div class="r-head"><b>Your Institute</b><span>Answer sheet evaluation report</span></div>
+      <div class="r-top">
+        <div class="r-who">
+          <b>Student name</b>
+          <span>CBSE, Class 11, Commerce</span>
+          <span>Accountancy: Journal test</span>
+        </div>
+        <div class="r-score">
+          <div class="r-ring" role="img" aria-label="Scored 8 out of 10">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="80 100"/></svg>
+            <b>8<small>/10</small></b>
+          </div>
+          <span>Batch average 5.5</span>
+        </div>
+      </div>
+      <ol class="r-qs">
+        <li><b>Q1</b><span>Journal Entries</span><i></i><em>2/2</em></li>
+        <li><b>Q2</b><span>Journal Entries</span><i></i><em>2/2</em></li>
+        <li><b>Q3</b><span>Journal Entries</span><i></i><em>2/2</em></li>
+        <li><b>Q4</b><span>Journal Entries</span><i></i><em>2/2</em></li>
+        <li class="zero"><b>Q5</b><span>Journal Entries</span><i></i><em>0/2</em><small>Discount Allowed A/c Dr; Cash / Bank A/c Dr</small></li>
+      </ol>
+      <div class="r-two">
+        <div><b>Strengths</b>Full marks in Q1, Q2, Q3 and Q4</div>
+        <div><b>Focus areas</b>Q5: Discount Allowed A/c Dr</div>
+      </div>
+      <p class="r-remark">Good effort. Q1 was well done. Practise Q5 once more to push your score higher.</p>
+      <img class="r-copy" src="assets/report-q5.jpg" width="1000" height="250" loading="lazy" alt="The student's handwritten journal entry with a red cross on Bad debts, and the margin note: Bad debts debited instead of Discount Allowed.">
+      <figcaption>From a real report. Student and institute names hidden.</figcaption>
+    </figure>
+
+    <section class="cta">
+      <a class="wa wa-big" data-where="cta_bottom" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20to%20send%205%20copies%20from%20my%20institute%20and%20see%20the%20PARTHU%20report." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send 5 copies on WhatsApp</a>
+      <div class="sub">Free check of 5 copies · Opens WhatsApp</div>
     </section>
     </div>
 
@@ -443,12 +579,17 @@
     </footer>
   </div>
 
+  <script src="assets/proof.js"></script>
   <script>
     (function () {
       var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var fmt = function (n) { return n.toLocaleString('en-IN'); };
+      var $ = function (id) { return document.getElementById(id); };
+      function whileVisible(el, cb) {
+        if (!('IntersectionObserver' in window)) return cb(true);
+        new IntersectionObserver(function (e) { cb(e[e.length - 1].isIntersecting); }).observe(el);
+      }
 
-      // Region: UAE visitors see AED prices and a UAE exam list. Set by ?region=ae (UAE ads) or ?region=in,
+      // Region: UAE visitors see a UAE exam list. Set by ?region=ae (UAE ads) or ?region=in,
       // remembered on this device; otherwise guessed from a Gulf time zone.
       var region = 'in';
       try {
@@ -461,56 +602,112 @@
         region = tz === 'Asia/Dubai' ? 'ae' : 'in';
       }
       var exams = ['Class 9–12', 'CA Foundation', 'CA Intermediate', 'CA Final', 'UPSC', 'State PCS'];
-      if (region === 'ae') {
-        exams = ['CBSE Class 9–12', 'ACCA', 'CA Foundation', 'CA Inter & Final', 'ICSE / ISC'];
-        document.querySelector('.ticker').setAttribute('aria-label', exams.join(', '));
-        document.getElementById('examLine').textContent = 'CBSE Class 9–12 · ACCA · CA Foundation · CA Inter & Final · ICSE / ISC';
-        [].slice.call(document.querySelectorAll('[data-ae]')).forEach(function (n) {
-          n.dataset.count = n.dataset.ae;
-          n.textContent = fmt(+n.dataset.ae);
-          n.previousElementSibling.textContent = 'AED ';
-        });
-      }
+      if (region === 'ae') exams = ['CBSE Class 9–12', 'ACCA', 'CA Foundation', 'CA Inter & Final', 'ICSE / ISC'];
 
-      // Exam ticker: repeat the list so the -50% loop is seamless.
-      var track = document.querySelector('.ticker-track');
-      for (var r = 0; r < 4; r++) exams.forEach(function (t) {
-        var s = document.createElement('span'); s.textContent = t; track.appendChild(s);
+      // Exam list.
+      var examList = document.querySelector('.ticker-track');
+      exams.forEach(function (t) {
+        var li = document.createElement('li'); li.textContent = t; examList.appendChild(li);
       });
 
-      // Count-up numbers (hero copies, prices).
-      function countUp(el, delay) {
-        var target = +el.dataset.count, dur = +(el.dataset.dur || 1300), step = target > 5000 && target % 1000 === 0 ? 1000 : 1;
-        if (reduced) { el.textContent = fmt(target); return; }
-        el.textContent = '0';
-        setTimeout(function () {
-          var t0 = performance.now();
-          (function tick(now) {
-            var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-            el.textContent = fmt(Math.round(target * e / step) * step);
-            if (p < 1) requestAnimationFrame(tick);
-          })(t0);
-        }, delay);
+      // Testimonials (assets/proof.js). Everything is set as text, and a section with no entries stays hidden.
+      var proof = window.PARTHU_PROOF || {};
+      var teachers = proof.teachers || [], students = proof.students || [];
+      function make(tag, cls, text) {
+        var el = document.createElement(tag);
+        if (cls) el.className = cls;
+        if (text) el.textContent = text;
+        return el;
       }
-      var heroCount = document.querySelector('.hero [data-count]');
-      countUp(heroCount, +heroCount.dataset.delay);
-
-      // Scroll reveal.
-      document.documentElement.classList.add('js');
-      var els = [].slice.call(document.querySelectorAll('[data-reveal]'));
-      function show(el) {
-        setTimeout(function () { el.classList.remove('pending'); }, +(el.dataset.delay || 0));
-        if (el.hasAttribute('data-prices')) el.querySelectorAll('[data-count]').forEach(function (n) { countUp(n, 200); });
+      function about(p) { return [p.role, p.place].filter(Boolean).join(', '); }
+      function ytId(v) {
+        var m = String(v || '').match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/);
+        return m ? m[1] : (/^[\w-]{11}$/.test(v || '') ? v : '');
       }
-      if ('IntersectionObserver' in window && !reduced) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) { if (en.isIntersecting) { io.unobserve(en.target); show(en.target); } });
-        }, { threshold: 0.2 });
-        els.forEach(function (el) {
-          if (el.getBoundingClientRect().top > innerHeight * 0.9) el.classList.add('pending');
-          io.observe(el);
+      function tile(p) {
+        var id = ytId(p.youtube), box = make('div', 'vid' + (p.vertical ? ' tall' : ''));
+        var btn = make('button'), img = make('img'), go = make('span', 'go');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Play video from ' + p.name);
+        img.src = p.thumb || 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+        img.alt = ''; img.loading = 'lazy';
+        go.innerHTML = '<svg aria-hidden="true"><use href="#i-play"/></svg>';
+        go.appendChild(document.createTextNode('Watch'));
+        btn.appendChild(img); btn.appendChild(go); box.appendChild(btn);
+        btn.addEventListener('click', function () {
+          var f = make('iframe');
+          f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+          f.title = 'Video from ' + p.name;
+          f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+          box.replaceChild(f, btn);
+          sendEvent('TestimonialPlay', null, 'testimonial_play', { person: p.name });
+        });
+        return box;
+      }
+      function voice(p) {
+        var fig = make('figure', 'voice' + (p.vertical ? ' tall' : '')), cap = make('figcaption');
+        if (ytId(p.youtube)) fig.appendChild(tile(p));
+        if (p.quote) fig.appendChild(make('blockquote', '', p.quote));
+        cap.appendChild(make('b', '', p.name));
+        if (about(p)) cap.appendChild(document.createTextNode(about(p)));
+        fig.appendChild(cap);
+        return fig;
+      }
+      // Teacher lines take turns beside the videos. The speaker's video is outlined while their line shows.
+      var lines = [];
+      teachers.forEach(function (p, i) {
+        if (!p.line) return;
+        var fig = make('figure'), q = make('blockquote', '', p.line);
+        q.lang = 'hi';
+        fig.appendChild(q); fig.appendChild(make('figcaption', '', p.name));
+        $('teacherQuotes').appendChild(fig);
+        lines.push({ fig: fig, tile: i });
+      });
+      function showLine(n) {
+        var tiles = $('teacherList').children;
+        lines.forEach(function (l, i) {
+          l.fig.classList.toggle('on', i === n);
+          if (tiles[l.tile]) tiles[l.tile].classList.toggle('lit', i === n);
         });
       }
+      var lead = teachers.filter(function (p) { return p.featured && p.quote; })[0];
+      if (lead) {
+        var leadCap = $('leadQuote').querySelector('figcaption');
+        $('leadQuote').querySelector('blockquote').textContent = lead.quote;
+        leadCap.appendChild(make('b', '', lead.name));
+        if (about(lead)) leadCap.appendChild(document.createTextNode(', ' + about(lead)));
+        $('leadQuote').hidden = false;
+      }
+      if (teachers.length) {
+        teachers.forEach(function (p) { $('teacherList').appendChild(voice(p)); });
+        $('teachers').hidden = false;
+      }
+      if (lines.length) {
+        var lineAt = 0, linePaused = false, lineSeen = false;
+        whileVisible($('teachers'), function (on) { lineSeen = on; });
+        $('teacherQuotes').hidden = false;
+        showLine(0);
+        $('teacherQuotes').addEventListener('mouseenter', function () { linePaused = true; });
+        $('teacherQuotes').addEventListener('mouseleave', function () { linePaused = false; });
+        if (lines.length > 1 && !reduced) setInterval(function () {
+          if (linePaused || !lineSeen || document.hidden) return;
+          lineAt = (lineAt + 1) % lines.length;
+          showLine(lineAt);
+        }, 5000);
+      }
+      students.forEach(function (p) {
+        if (ytId(p.youtube)) { $('studentVideos').appendChild(voice(p)); $('studentVideos').hidden = false; return; }
+        var li = make('li'), by = make('span');
+        var said = make('q', '', p.quote);
+        said.lang = 'hi';
+        li.appendChild(said);
+        by.appendChild(make('b', '', p.name));
+        if (about(p)) by.appendChild(document.createTextNode(', ' + about(p)));
+        li.appendChild(by);
+        $('studentNotes').appendChild(li);
+        $('studentNotes').hidden = false;
+      });
+      if (students.length) $('students').hidden = false;
 
       // Marking demo: marks pop in one by one, score adds up, then the missing point shows. Loops.
       var rows = [].slice.call(document.querySelectorAll('#markCard .line'));
@@ -529,7 +726,16 @@
         stamp.classList.toggle('on', step >= 8);
       }
       if (reduced) { step = 8; renderCard(); }
-      else { renderCard(); setInterval(function () { step = (step + 1) % 16; renderCard(); }, 600); }
+      else {
+        renderCard();
+        // Runs only while the card is on screen, so it costs nothing the rest of the time.
+        var markTimer = null;
+        var markTick = function () { step = (step + 1) % 16; renderCard(); };
+        whileVisible($('markCard'), function (on) {
+          clearInterval(markTimer);
+          markTimer = on ? setInterval(markTick, 600) : null;
+        });
+      }
 
       // Video: starts muted (browsers only autoplay muted). Tap toggles sound via the YouTube player API.
       var box = document.getElementById('promo');
@@ -537,10 +743,18 @@
       var btn = box.querySelector('.tap');
       var label = box.querySelector('.sound');
       var muted = true;
+      // The player is the heaviest thing on the page, so it starts only after everything else is ready.
+      function startPromo() { if (!frame.src) frame.src = frame.dataset.src; }
+      // Phones wait for the first touch or scroll; desktops also start on their own after a few seconds.
+      ['scroll', 'touchstart', 'pointerdown', 'keydown'].forEach(function (ev) {
+        addEventListener(ev, startPromo, { once: true, passive: true });
+      });
+      if (innerWidth >= 960) setTimeout(startPromo, 4000);
       function cmd(func) {
         frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
       }
       btn.addEventListener('click', function () {
+        startPromo();
         muted = !muted;
         cmd('playVideo');
         cmd(muted ? 'mute' : 'unMute');
@@ -581,14 +795,14 @@
         a.href = url.origin + url.pathname + '?text=' + encodeURIComponent(text);
         a.addEventListener('click', function () {
           sendEvent('Contact', 'Contact', 'whatsapp_click', {
-            button: a.classList.contains('wa-big') ? 'cta_bottom' : 'header',
+            button: a.dataset.where || (a.classList.contains('wa-big') ? 'cta_bottom' : 'header'),
             source: ref,
             region: region
           });
         });
       });
 
-      // Engaged visitors: scrolled half the page, and reached the price section.
+      // Engaged visitors: scrolled half the page, and reached the 5-copies offer.
       var halfSent = false;
       addEventListener('scroll', function () {
         if (halfSent) return;
@@ -598,12 +812,12 @@
           sendEvent('ViewContent', 'ViewContent', 'scroll_50', { content_name: 'landing' });
         }
       }, { passive: true });
-      var priceEl = document.querySelector('[data-prices]');
+      var offerEl = document.querySelector('[data-offer]');
       if ('IntersectionObserver' in window) {
         var po = new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting) { po.disconnect(); sendEvent('ViewPricing', null, 'view_pricing'); }
+          if (entries[0].isIntersecting) { po.disconnect(); sendEvent('ViewOffer', null, 'view_offer'); }
         }, { threshold: 0.5 });
-        po.observe(priceEl);
+        po.observe(offerEl);
       }
     })();
   </script>
