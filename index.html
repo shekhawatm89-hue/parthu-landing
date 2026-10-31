@@ -196,22 +196,24 @@
     /* Text beside the videos and the report */
     .sec-lead { font-size: 16px; line-height: 1.55; text-wrap: pretty; }
     /* Teacher lines take turns in one spot. Stacked in one cell, so the page never jumps. */
-    .sec-quote { display: grid; }
+    .sec-quote {
+      display: grid; overflow: hidden; border-radius: 14px; background: #fff; color: var(--navy);
+      box-shadow: 0 16px 30px -18px rgba(6,17,46,.55);
+    }
     .sec-quote figure {
-      grid-area: 1 / 1; margin: 0; opacity: 0; transform: translateY(10px); visibility: hidden;
+      grid-area: 1 / 1; display: flex; flex-direction: column; margin: 0; opacity: 0; transform: translateY(10px); visibility: hidden;
       transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1), visibility 0s .7s;
     }
     .sec-quote figure.on { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
-    .sec-quote blockquote { margin: 0; font: 700 23px/1.4 var(--hand); }
-    .sec-quote figcaption { margin-top: 4px; font-size: 14px; }
+    .sec-quote blockquote { flex: 1; margin: 0; padding: 18px 20px 14px; font: 700 22px/1.3 var(--hand); color: var(--navy); }
+    .sec-quote figcaption { padding: 10px 20px 11px; background: var(--blue); font-size: 14px; line-height: 1.35; color: #fff; }
+    .sec-quote figcaption b { display: block; font: 800 15px var(--head); color: #fff; }
 
     /* Teachers */
     .teachers { margin-top: 48px; padding: 36px 0 38px; background: var(--navy); color: #fff; }
     .teachers h2 { padding: 0 20px; text-wrap: balance; }
     .teachers .sec-lead { margin-top: 12px; padding: 0 20px; color: #d5ddee; }
-    .teachers .sec-quote { margin-top: 18px; padding: 0 20px; }
-    .teachers .sec-quote blockquote { color: #fff; }
-    .teachers .sec-quote figcaption { color: #b9c6e4; }
+    .teachers .sec-quote { margin: 18px 20px 0; }
     .rail {
       display: flex; gap: 14px; margin-top: 20px; padding: 0 20px 6px;
       overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 20px;
@@ -226,23 +228,23 @@
     .voice figcaption b { display: block; color: #fff; font-weight: 600; }
     .teachers .wa-big { margin: 24px 20px 0; }
 
-    /* Students: one ruled sheet rather than a grid of boxes */
-    .students { padding: 42px 20px 0; }
+    /* Students */
+    .students-band { background: var(--tint); padding-bottom: 24px; }
+    .students { padding: 36px 20px 0; }
     .students h2 { text-wrap: balance; }
-    .students .sec-lead { margin-top: 8px; color: var(--text-2); }
     .students .rail { margin: 16px -20px 0; }
     .students .voice figcaption { color: var(--muted); }
     .students .voice figcaption b { color: var(--navy); }
-    .notes {
-      position: relative; margin: 18px 0 0; padding: 0 16px 0 40px; list-style: none;
-      border: 1px solid var(--line-2); border-radius: 14px; background-color: #fffefb;
-      background-image: repeating-linear-gradient(to bottom, transparent 0 33px, #e3ebf7 33px 34px);
-      box-shadow: 0 14px 34px -20px rgba(10,26,68,.45);
-    }
-    .notes::before { content: ""; position: absolute; top: 0; bottom: 0; left: 28px; width: 1px; background: #f0b9b9; }
-    .notes q { display: block; quotes: none; font: 400 19px/34px var(--hand); color: #1d2b55; }
-    .notes span { display: block; font-size: 14px; line-height: 34px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .notes span b { color: var(--navy); font-weight: 600; }
+
+    /* Checked slips that keep moving past */
+    .slips { margin: 26px -20px 0; overflow: hidden; }
+    .slips-track { display: flex; gap: 14px; width: max-content; padding: 4px 0 22px; animation: slips 42s linear infinite; }
+    .slips:hover .slips-track { animation-play-state: paused; }
+    .slip { position: relative; display: flex; flex-direction: column; flex: none; width: 280px; margin: 0; overflow: hidden; border-radius: 14px; background: #fff; box-shadow: 0 16px 24px -18px rgba(6,17,46,.55); }
+    .slip svg { position: absolute; top: 16px; right: 14px; width: 22px; height: 19px; fill: none; stroke: #c62f2f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+    .slip blockquote { flex: 1; margin: 0; padding: 18px 44px 14px 18px; font: 700 19px/1.3 var(--hand); color: var(--navy); }
+    .slip figcaption { padding: 10px 18px 11px; background: var(--blue); font: 800 15px var(--head); color: #fff; }
+    @keyframes slips { to { transform: translateX(-50%); } }
 
     /* The offer: 5 copies on WhatsApp */
     .offer { padding: 44px 20px 0; }
@@ -348,22 +350,20 @@
       }
       .teachers h2 { grid-column: 1; grid-row: 2; padding: 0; font-size: 32px; line-height: 1.15; }
       .teachers .sec-lead { grid-column: 1; grid-row: 3; margin-top: 16px; padding: 0; font-size: 17px; }
-      .teachers .sec-quote { grid-column: 1; grid-row: 4; margin-top: 20px; padding: 0; }
-      .sec-quote blockquote { font-size: 25px; }
+      .teachers .sec-quote { grid-column: 1; grid-row: 4; margin: 20px 0 0; }
+      .sec-quote blockquote { font-size: 23px; }
       .rail { grid-column: 2; grid-row: 1 / -1; margin: 0; padding: 0; gap: 24px; overflow: visible; scroll-snap-type: none; }
       .voice.tall, .voice.tall:only-child { flex: 0 0 230px; max-width: none; }
       .voice:not(.tall) { flex: 1 1 0; max-width: none; min-width: 0; }
       .teachers .wa-big { grid-column: 1; grid-row: 5; justify-self: start; margin: 26px 0 0; padding: 19px 22px; white-space: nowrap; }
       .students {
-        display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto auto 1fr auto;
-        column-gap: 56px; max-width: 1120px; margin: 0 auto; padding: 88px 32px 0; box-sizing: content-box;
+        display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto 1fr auto;
+        column-gap: 56px; max-width: 1120px; margin: 0 auto; padding: 72px 32px 0; box-sizing: content-box;
       }
       .students h2 { grid-column: 1; grid-row: 2; font-size: 32px; line-height: 1.15; }
-      .students .sec-lead { grid-column: 1; grid-row: 3; margin-top: 16px; font-size: 17px; }
-      .students .rail { grid-column: 2; grid-row: 1 / 5; margin: 0; padding: 0; }
-      .notes { grid-column: 1 / -1; grid-row: 5; columns: 3; column-gap: 44px; margin-top: 34px; padding: 0 28px 0 48px; }
-      .notes::before { left: 32px; }
-      .notes li { break-inside: avoid; }
+      .students .rail { grid-column: 2; grid-row: 1 / 4; margin: 0; padding: 0; }
+      .students-band { padding-bottom: 52px; }
+      .slips { grid-column: 1 / -1; grid-row: 4; margin: 40px 0 0; }
 
       /* Prices side by side, button centred under them */
       .buy { padding: 96px 32px 0; }
@@ -382,6 +382,10 @@
 
     @keyframes stampPop { 0% { opacity: 0; transform: scale(.3) rotate(-32deg); } 70% { transform: scale(1.15) rotate(-12deg); } 100% { opacity: 1; transform: rotate(-12deg); } }
     @keyframes markPop { 0% { opacity: 0; transform: scale(.3) rotate(-20deg); } 70% { transform: scale(1.15); } 100% { opacity: 1; transform: none; } }
+    @media (min-width: 960px) and (max-width: 1120px) {
+      .voice.tall, .voice.tall:only-child { flex-basis: 180px; }
+      .students { column-gap: 32px; }
+    }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
   <script>
@@ -508,19 +512,19 @@
     <section class="teachers" id="teachers" hidden>
       <div class="teachers-in">
         <h2>Copies back while the chapter is still fresh.</h2>
-        <p class="sec-lead">Deepesh Sir's copies used to take a week. By then the class was on the next chapter. Now his students see their mistakes the next day.</p>
         <div class="sec-quote" id="teacherQuotes" hidden></div>
         <div class="rail" id="teacherList"></div>
         <a class="wa wa-big" data-where="after_teachers" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20to%20send%205%20copies%20from%20my%20institute%20and%20see%20the%20PARTHU%20report." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send 5 copies on WhatsApp</a>
       </div>
     </section>
 
-    <section class="students" id="students" hidden>
+    <div class="students-band" id="studentsBand" hidden>
+    <section class="students" id="students">
       <h2>Marks alone don't show what went wrong.</h2>
-      <p class="sec-lead">Tisha used to get back only marks or a cross. Now she can see exactly what was missing, and she doesn't repeat the mistake.</p>
       <div class="rail" id="studentVideos" hidden></div>
-      <ul class="notes" id="studentNotes" hidden></ul>
+      <div class="slips" id="studentSlips" hidden><div class="slips-track"></div></div>
     </section>
+    </div>
 
     <div class="buy">
     <section class="offer" data-offer>
@@ -653,22 +657,73 @@
         fig.appendChild(cap);
         return fig;
       }
-      // Teacher lines take turns beside the videos. The speaker's video is outlined while their line shows.
-      var lines = [];
-      teachers.forEach(function (p, i) {
-        if (!p.line) return;
-        var fig = make('figure'), q = make('blockquote', '', p.line);
-        q.lang = 'hi';
-        fig.appendChild(q); fig.appendChild(make('figcaption', '', p.name));
-        $('teacherQuotes').appendChild(fig);
-        lines.push({ fig: fig, tile: i });
-      });
-      function showLine(n) {
-        var tiles = $('teacherList').children;
-        lines.forEach(function (l, i) {
-          l.fig.classList.toggle('on', i === n);
-          if (tiles[l.tile]) tiles[l.tile].classList.toggle('lit', i === n);
+      // On phones only part of the rail fits, so it slides by itself until someone touches it.
+      function slideRail(rail, i) {
+        if (rail.touched || !rail.children[i] || rail.scrollWidth <= rail.clientWidth) return;
+        rail.scrollTo({ left: rail.children[i].offsetLeft - rail.children[0].offsetLeft, behavior: 'smooth' });
+      }
+      function holdRail(rail) {
+        rail.addEventListener('pointerdown', function () { rail.touched = true; });
+      }
+      function autoSlide(rail) {
+        var at = 0, seen = false;
+        holdRail(rail);
+        whileVisible(rail, function (on) { seen = on; });
+        if (rail.children.length > 1 && !reduced) setInterval(function () {
+          if (!seen || document.hidden) return;
+          at = (at + 1) % rail.children.length;
+          slideRail(rail, at);
+        }, 4000);
+      }
+      // Lines take turns in one spot, and the speaker's video is outlined while their line shows.
+      function rotateLines(box, people, tileHost, watch) {
+        var lines = [], tileAt = 0, at = 0, paused = false, seen = false;
+        people.forEach(function (p) {
+          var tile = ytId(p.youtube) ? tileAt++ : -1;
+          if (!p.line) return;
+          var fig = make('figure'), q = make('blockquote', '', p.line), by = make('figcaption');
+          by.appendChild(make('b', '', p.name));
+          if (about(p)) by.appendChild(document.createTextNode(about(p)));
+          fig.appendChild(q); fig.appendChild(by);
+          box.appendChild(fig);
+          lines.push({ fig: fig, tile: tile });
         });
+        if (!lines.length) return;
+        function show(n) {
+          var tiles = tileHost.children;
+          [].forEach.call(tiles, function (t) { t.classList.remove('lit'); });
+          lines.forEach(function (l, i) { l.fig.classList.toggle('on', i === n); });
+          if (lines[n].tile >= 0 && tiles[lines[n].tile]) {
+            tiles[lines[n].tile].classList.add('lit');
+            slideRail(tileHost, lines[n].tile);
+          }
+        }
+        holdRail(tileHost);
+        box.hidden = false;
+        show(0);
+        box.addEventListener('mouseenter', function () { paused = true; });
+        box.addEventListener('mouseleave', function () { paused = false; });
+        whileVisible(watch, function (on) { seen = on; });
+        if (lines.length > 1 && !reduced) setInterval(function () {
+          if (paused || !seen || document.hidden) return;
+          at = (at + 1) % lines.length;
+          show(at);
+        }, 5000);
+      }
+      function slipList(people) {
+        var track = document.querySelector('.slips-track');
+        [0, 1].forEach(function (copy) {
+          people.forEach(function (p) {
+            if (!p.line) return;
+            var fig = make('figure', 'slip');
+            fig.innerHTML = '<svg aria-hidden="true"><use href="#i-tick"/></svg>';
+            fig.appendChild(make('blockquote', '', p.line));
+            fig.appendChild(make('figcaption', '', p.name));
+            if (copy) fig.setAttribute('aria-hidden', 'true');
+            track.appendChild(fig);
+          });
+        });
+        $('studentSlips').hidden = false;
       }
       var lead = teachers.filter(function (p) { return p.featured && p.quote; })[0];
       if (lead) {
@@ -682,32 +737,15 @@
         teachers.forEach(function (p) { $('teacherList').appendChild(voice(p)); });
         $('teachers').hidden = false;
       }
-      if (lines.length) {
-        var lineAt = 0, linePaused = false, lineSeen = false;
-        whileVisible($('teachers'), function (on) { lineSeen = on; });
-        $('teacherQuotes').hidden = false;
-        showLine(0);
-        $('teacherQuotes').addEventListener('mouseenter', function () { linePaused = true; });
-        $('teacherQuotes').addEventListener('mouseleave', function () { linePaused = false; });
-        if (lines.length > 1 && !reduced) setInterval(function () {
-          if (linePaused || !lineSeen || document.hidden) return;
-          lineAt = (lineAt + 1) % lines.length;
-          showLine(lineAt);
-        }, 5000);
+      if (teachers.length) rotateLines($('teacherQuotes'), teachers, $('teacherList'), $('teachers'));
+      if (students.length) {
+        students.forEach(function (p) {
+          if (ytId(p.youtube)) { $('studentVideos').appendChild(voice(p)); $('studentVideos').hidden = false; }
+        });
+        $('studentsBand').hidden = false;
+        slipList(students);
+        autoSlide($('studentVideos'));
       }
-      students.forEach(function (p) {
-        if (ytId(p.youtube)) { $('studentVideos').appendChild(voice(p)); $('studentVideos').hidden = false; return; }
-        var li = make('li'), by = make('span');
-        var said = make('q', '', p.quote);
-        said.lang = 'hi';
-        li.appendChild(said);
-        by.appendChild(make('b', '', p.name));
-        if (about(p)) by.appendChild(document.createTextNode(', ' + about(p)));
-        li.appendChild(by);
-        $('studentNotes').appendChild(li);
-        $('studentNotes').hidden = false;
-      });
-      if (students.length) $('students').hidden = false;
 
       // Marking demo: marks pop in one by one, score adds up, then the missing point shows. Loops.
       var rows = [].slice.call(document.querySelectorAll('#markCard .line'));
