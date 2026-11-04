@@ -5,7 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PARTHU.AI | Every test copy checked against your marking scheme</title>
   <meta name="facebook-domain-verification" content="n83hiorvd490tt4mdqz0unt5befu5q" />
-  <meta name="description" content="Your teacher writes the marking scheme. PARTHU checks every copy against it, the same way, every time. For coaching institutes: Class 9–12, CA, UPSC and State PCS.">
+  <meta name="description" content="Your teacher writes the marking scheme. PARTHU checks every copy against it, the same way, every time. For coaching institutes: Class 6–12, CA, UPSC and State PCS.">
+  <link rel="canonical" href="https://www.parthuai.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.parthuai.com/">
+  <meta property="og:site_name" content="PARTHU.AI">
+  <meta property="og:title" content="PARTHU.AI | Every test copy checked against your marking scheme">
+  <meta property="og:description" content="Send 5 answer copies from your institute on WhatsApp. We check them free and send a report for each student.">
+  <meta property="og:image" content="https://www.parthuai.com/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"PARTHU.AI","url":"https://www.parthuai.com/","logo":"https://www.parthuai.com/assets/parthu-mark.png"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What if the handwriting is very poor?","acceptedAnswer":{"@type":"Answer","text":"We need clear photos and readable writing. If an answer can’t be read, it can’t be marked reliably, so we flag it and ask for a clearer photo."}},{"@type":"Question","name":"Are copies in Hindi or other languages checked?","acceptedAnswer":{"@type":"Answer","text":"Right now we check descriptive copies written in English. Support for Hindi and other languages is coming later."}},{"@type":"Question","name":"How soon do we get the checked copies back?","acceptedAnswer":{"@type":"Answer","text":"Usually the same day, and within 24 hours once we have your marking scheme."}},{"@type":"Question","name":"Which classes, subjects and exams are covered?","acceptedAnswer":{"@type":"Answer","text":"Class 6 to 12 in all descriptive, long-answer subjects, plus CA Foundation, CA Intermediate, CA Final, UPSC and State PCS. Long answers in the style of UPSC Mains are covered too."}},{"@type":"Question","name":"Can we use our own marking scheme?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your teachers can share their own marking scheme. If you don’t have one, we can create it for you."}},{"@type":"Question","name":"How should we send the photos?","acceptedAnswer":{"@type":"Answer","text":"Clear, full-page photos, one photo per page. You can also send all the pages as a single PDF."}},{"@type":"Question","name":"What if a mark looks wrong?","acceptedAnswer":{"@type":"Answer","text":"Your teacher can override any mark."}},{"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"Pricing starts at ₹9 per copy + GST. Your exact quote depends on your classes, subjects and monthly volume."}},{"@type":"Question","name":"Is student data safe? Can your team read the copies?","acceptedAnswer":{"@type":"Answer","text":"Student data is protected by design. The system is built so that neither our team nor any employee can read your students’ copies."}}]}]}</script>
   <link rel="icon" href="assets/parthu-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -291,6 +302,15 @@
     .cta { padding: 26px 20px 0; display: flex; flex-direction: column; gap: 10px; }
     .cta .sub { text-align: center; font-size: 14px; color: var(--muted); }
 
+    .faq { padding: 44px 20px 0; }
+    .faq h2 { margin-bottom: 8px; }
+    .faq details { border-bottom: 1px solid var(--line-2); }
+    .faq summary { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; font: 700 16px/1.35 var(--head); cursor: pointer; list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; flex: none; font: 700 22px/1 var(--head); color: var(--blue); }
+    .faq details[open] summary::after { content: '\2212'; }
+    .faq details p { padding: 0 0 18px; font-size: 16px; line-height: 1.55; color: var(--text-2); }
+
     footer { margin-top: 44px; padding: 26px 20px 34px; background: var(--navy); color: #d5ddee; }
     .foot-in { display: flex; flex-direction: column; gap: 8px; }
     footer .name { font: 700 16px var(--head); color: #fff; }
@@ -375,6 +395,11 @@
       .report { grid-column: 2; grid-row: 1 / -1; margin: 0; }
       .cta { grid-column: 1; grid-row: 3; padding: 28px 0 0; }
 
+      .faq { max-width: 800px; margin: 0 auto; padding: 96px 32px 0; box-sizing: content-box; }
+      .faq h2 { margin-bottom: 14px; }
+      .faq summary { font-size: 18px; padding: 20px 0; }
+      .faq details p { font-size: 17px; }
+
       footer { margin-top: 96px; padding: 40px 32px; }
       .foot-in { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; align-items: end; }
       .foot-in .tag { grid-column: 2; grid-row: 1 / span 2; margin: 0; }
@@ -451,7 +476,7 @@
 
     <div class="media">
     <figure class="video" id="promo">
-      <img class="poster" src="assets/thumbs/hero.webp" width="960" height="540" alt="">
+      <img class="poster" src="assets/thumbs/hero.webp" width="960" height="540" alt="PARTHU.AI promo video">
       <iframe
         data-src="https://www.youtube-nocookie.com/embed/WNVaQFqKj3o?autoplay=1&amp;mute=1&amp;playsinline=1&amp;loop=1&amp;playlist=WNVaQFqKj3o&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;enablejsapi=1"
         title="PARTHU.AI promo video"
@@ -572,6 +597,46 @@
       <div class="sub">Free check of 5 copies · Opens WhatsApp</div>
     </section>
     </div>
+
+    <section class="faq">
+      <h2>Questions institutes ask</h2>
+      <details>
+        <summary>What if the handwriting is very poor?</summary>
+        <p>We need clear photos and readable writing. If an answer can’t be read, it can’t be marked reliably, so we flag it and ask for a clearer photo.</p>
+      </details>
+      <details>
+        <summary>Are copies in Hindi or other languages checked?</summary>
+        <p>Right now we check descriptive copies written in English. Support for Hindi and other languages is coming later.</p>
+      </details>
+      <details>
+        <summary>How soon do we get the checked copies back?</summary>
+        <p>Usually the same day, and within 24 hours once we have your marking scheme.</p>
+      </details>
+      <details>
+        <summary>Which classes, subjects and exams are covered?</summary>
+        <p>Class 6 to 12 in all descriptive, long-answer subjects, plus CA Foundation, CA Intermediate, CA Final, UPSC and State PCS. Long answers in the style of UPSC Mains are covered too.</p>
+      </details>
+      <details>
+        <summary>Can we use our own marking scheme?</summary>
+        <p>Yes. Your teachers can share their own marking scheme. If you don’t have one, we can create it for you.</p>
+      </details>
+      <details>
+        <summary>How should we send the photos?</summary>
+        <p>Clear, full-page photos, one photo per page. You can also send all the pages as a single PDF.</p>
+      </details>
+      <details>
+        <summary>What if a mark looks wrong?</summary>
+        <p>Your teacher can override any mark.</p>
+      </details>
+      <details>
+        <summary>What does it cost?</summary>
+        <p>Pricing starts at ₹9 per copy + GST. Your exact quote depends on your classes, subjects and monthly volume.</p>
+      </details>
+      <details>
+        <summary>Is student data safe? Can your team read the copies?</summary>
+        <p>Student data is protected by design. The system is built so that neither our team nor any employee can read your students’ copies.</p>
+      </details>
+    </section>
 
     <footer>
       <div class="foot-in">
