@@ -400,13 +400,18 @@
 
       /* Prices side by side, button centred under them */
       .buy { padding: 96px 32px 0; }
-      .buy { display: grid; grid-template-columns: minmax(0, 1fr) 500px; grid-template-rows: 1fr auto auto 1fr; column-gap: 72px; }
+      .buy { display: grid; grid-template-columns: minmax(0, 1fr) 500px; grid-template-rows: 1fr auto 1fr auto; column-gap: 72px; }
       .offer { grid-column: 1; grid-row: 2; padding: 0; }
       .offer h2 { font-size: 38px; line-height: 1.15; }
       .offer .sec-lead { margin: 14px 0 22px; font-size: 17px; }
       .offer .step { padding: 16px 0; }
-      .report { grid-column: 2; grid-row: 1 / -1; align-self: start; position: sticky; top: 96px; margin: 0; }
-      .cta { grid-column: 1; grid-row: 3; padding: 28px 0 0; }
+      .report { grid-column: 2; grid-row: 1 / 4; margin: 0; }
+      /* Form spans both columns under the offer and report, fields two to a row */
+      .cta { grid-column: 1 / -1; grid-row: 4; padding: 56px 0 0; }
+      .lead { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; padding: 28px 32px; }
+      .lead h3, .lead-err, .lead .sub { grid-column: 1 / -1; }
+      .lead button { align-self: end; padding: 12px; min-height: 46px; }
+      .lead-done { padding: 28px 32px; }
 
       .faq { max-width: 800px; margin: 0 auto; padding: 96px 32px 0; box-sizing: content-box; }
       .faq h2 { margin-bottom: 14px; }
