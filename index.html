@@ -71,18 +71,18 @@
     .brand span { font: 900 18px var(--head); letter-spacing: -.01em; color: var(--navy); }
     .brand span b { color: var(--blue); font-weight: 900; }
 
-    /* Buttons */
-    .btn {
+    /* WhatsApp buttons */
+    .wa {
       display: flex; align-items: center; justify-content: center; gap: 9px;
       background: var(--blue); color: #fff; text-decoration: none;
       transition: background-color .18s ease;
     }
-    .btn:hover, .btn:focus-visible { background: #0f4fc0; color: #fff; }
-    .btn:active { background: #0c419f; }
-    .btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
-    .btn svg { width: 1.2em; height: 1.2em; fill: currentColor; flex: none; }
-    .btn-small { font: 700 14px var(--head); padding: 0 14px; border-radius: 10px; min-height: 44px; }
-    .btn-big { font: 800 17px var(--head); padding: 19px; border-radius: 12px; text-align: center; }
+    .wa:hover, .wa:focus-visible { background: #0f4fc0; color: #fff; }
+    .wa:active { background: #0c419f; }
+    .wa:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+    .wa svg { width: 1.2em; height: 1.2em; fill: currentColor; flex: none; }
+    .wa-small { font: 700 14px var(--head); padding: 0 14px; border-radius: 10px; min-height: 44px; }
+    .wa-big { font: 800 17px var(--head); padding: 19px; border-radius: 12px; text-align: center; }
 
     /* Hero */
     .hero { padding: 34px 20px 30px; display: flex; flex-direction: column; gap: 16px; }
@@ -237,7 +237,7 @@
     .voice blockquote { margin: 14px 0 0; font-size: 16px; line-height: 1.5; color: #e6ecfa; text-wrap: pretty; }
     .voice figcaption { margin-top: 8px; font-size: 14px; line-height: 1.4; color: #b9c6e4; }
     .voice figcaption b { display: block; color: #fff; font-weight: 600; }
-    .teachers .btn-big { margin: 24px 20px 0; }
+    .teachers .wa-big { margin: 24px 20px 0; }
 
     /* Students */
     .students-band { background: var(--tint); padding-bottom: 24px; }
@@ -257,7 +257,7 @@
     .slip figcaption { padding: 10px 18px 11px; background: var(--blue); font: 800 15px var(--head); color: #fff; }
     @keyframes slips { to { transform: translateX(-50%); } }
 
-    /* The offer: free check of 2 copies, asked for on WhatsApp after the form */
+    /* The offer: 2 copies on WhatsApp */
     .offer { padding: 44px 20px 0; }
     .offer h2 { text-wrap: balance; }
     .offer .sec-lead { margin: 8px 0 16px; color: var(--text-2); }
@@ -301,19 +301,6 @@
 
     .cta { padding: 26px 20px 0; display: flex; flex-direction: column; gap: 10px; }
     .cta .sub { text-align: center; font-size: 14px; color: var(--muted); }
-    #lead { scroll-margin-top: 76px; }
-    .lead, .lead-done { display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid var(--line-2); border-radius: 16px; background: #fff; box-shadow: 0 14px 34px -24px rgba(10,26,68,.45); }
-    .lead h3, .lead-done h3 { margin: 0; font: 800 20px var(--head); }
-    .lead label { display: flex; flex-direction: column; gap: 6px; font: 600 14px var(--head); color: var(--navy); }
-    .lead .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .lead input, .lead select { width: 100%; min-width: 0; min-height: 46px; padding: 10px 12px; border: 1px solid #c5d0e4; border-radius: 10px; background: #fff; font: 400 16px 'IBM Plex Sans', system-ui, sans-serif; color: var(--navy); }
-    .lead input:focus, .lead select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px #cfe0ff; }
-    .lead [aria-invalid="true"] { border-color: var(--red); }
-    .lead .hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
-    .lead-err { margin: 0; font-size: 14px; color: var(--red); }
-    .lead button { border: 0; cursor: pointer; }
-    .lead button:disabled { opacity: .6; cursor: wait; }
-    .lead-done p { font-size: 16px; line-height: 1.55; color: var(--text-2); }
 
     .faq { padding: 44px 20px 0; }
     .faq h2 { margin-bottom: 8px; }
@@ -388,7 +375,7 @@
       .rail { grid-column: 2; grid-row: 1 / -1; margin: 0; padding: 0; gap: 24px; overflow: visible; scroll-snap-type: none; }
       .voice.tall, .voice.tall:only-child { flex: 0 0 230px; max-width: none; }
       .voice:not(.tall) { flex: 1 1 0; max-width: none; min-width: 0; }
-      .teachers .btn-big { grid-column: 1; grid-row: 5; justify-self: start; margin: 26px 0 0; padding: 19px 22px; white-space: nowrap; }
+      .teachers .wa-big { grid-column: 1; grid-row: 5; justify-self: start; margin: 26px 0 0; padding: 19px 22px; white-space: nowrap; }
       .students {
         display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto 1fr auto;
         column-gap: 56px; max-width: 1120px; margin: 0 auto; padding: 72px 32px 0; box-sizing: content-box;
@@ -400,18 +387,13 @@
 
       /* Prices side by side, button centred under them */
       .buy { padding: 96px 32px 0; }
-      .buy { display: grid; grid-template-columns: minmax(0, 1fr) 500px; grid-template-rows: 1fr auto 1fr auto; column-gap: 72px; }
+      .buy { display: grid; grid-template-columns: minmax(0, 1fr) 500px; grid-template-rows: 1fr auto auto 1fr; column-gap: 72px; }
       .offer { grid-column: 1; grid-row: 2; padding: 0; }
       .offer h2 { font-size: 38px; line-height: 1.15; }
       .offer .sec-lead { margin: 14px 0 22px; font-size: 17px; }
       .offer .step { padding: 16px 0; }
-      .report { grid-column: 2; grid-row: 1 / 4; margin: 0; }
-      /* Form spans both columns under the offer and report, fields two to a row */
-      .cta { grid-column: 1 / -1; grid-row: 4; padding: 56px 0 0; }
-      .lead { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; padding: 28px 32px; }
-      .lead h3, .lead-err, .lead .sub { grid-column: 1 / -1; }
-      .lead button { align-self: end; padding: 12px; min-height: 46px; }
-      .lead-done { padding: 28px 32px; }
+      .report { grid-column: 2; grid-row: 1 / -1; margin: 0; }
+      .cta { grid-column: 1; grid-row: 3; padding: 28px 0 0; }
 
       .faq { max-width: 800px; margin: 0 auto; padding: 96px 32px 0; box-sizing: content-box; }
       .faq h2 { margin-bottom: 14px; }
@@ -465,9 +447,10 @@
 </head>
 <body>
   <!--
+    WhatsApp number: 919216652471 (91 + 9216652471). To change it, replace it in both hrefs below.
     Promo video: YouTube WNVaQFqKj3o. To change it, replace that ID in the iframe src (it appears twice).
   -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-tick" viewBox="0 0 17 15"><path d="M2 8.5 6.2 13 15 2"/></symbol><symbol id="i-play" viewBox="0 0 12 14"><path d="M1 1.2v11.6c0 .8.9 1.3 1.6.8l8.6-5.8c.6-.4.6-1.2 0-1.6L2.6.4C1.9-.1 1 .4 1 1.2z"/></symbol></svg>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol><symbol id="i-tick" viewBox="0 0 17 15"><path d="M2 8.5 6.2 13 15 2"/></symbol><symbol id="i-play" viewBox="0 0 12 14"><path d="M1 1.2v11.6c0 .8.9 1.3 1.6.8l8.6-5.8c.6-.4.6-1.2 0-1.6L2.6.4C1.9-.1 1 .4 1 1.2z"/></symbol></svg>
   <div class="page">
 
     <header class="top">
@@ -476,7 +459,7 @@
         <img src="assets/parthu-mark.png" alt="">
         <span>PARTHU<b>.AI</b></span>
       </a>
-      <a class="btn btn-small" data-where="header" href="#lead">Free check</a>
+      <a class="wa wa-small" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20to%20send%202%20copies%20from%20my%20institute%20and%20see%20the%20PARTHU%20report." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp us</a>
       </div>
     </header>
 
@@ -556,7 +539,7 @@
         <h2>Copies back while the chapter is still fresh.</h2>
         <div class="sec-quote" id="teacherQuotes" hidden></div>
         <div class="rail" id="teacherList"></div>
-        <a class="btn btn-big" data-where="after_teachers" href="#lead">Get a free check of 2 copies</a>
+        <a class="wa wa-big" data-where="after_teachers" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20to%20send%202%20copies%20from%20my%20institute%20and%20see%20the%20PARTHU%20report." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send 2 copies on WhatsApp</a>
       </div>
     </section>
 
@@ -572,8 +555,8 @@
     <section class="offer" data-offer>
       <h2>Give us 2 copies. See the report.</h2>
       <p class="sec-lead">Don't take our word for it. Send copies from one of your own tests and judge the report yourself. Checking these 2 copies is free.</p>
-      <div class="step"><span class="k">FILL</span><span class="v">Tell us about your institute in the form below.</span></div>
-      <div class="step"><span class="k">SEND</span><span class="v">We message you on WhatsApp. Send the question paper and 2 answer copies, plus your marking scheme if you have one.</span></div>
+      <div class="step"><span class="k">SNAP</span><span class="v">Take photos of 2 answer copies from any test.</span></div>
+      <div class="step"><span class="k">SEND</span><span class="v">Send them on WhatsApp with the question paper, plus your marking scheme if you have one.</span></div>
       <div class="step"><span class="k">SEE</span><span class="v">Get a report like this for each copy: marks by question, strengths, focus areas and corrections in red.</span></div>
     </section>
 
@@ -609,33 +592,9 @@
       <figcaption>From a real report. Student and institute names hidden.</figcaption>
     </figure>
 
-    <section class="cta" id="lead">
-      <form class="lead" id="leadForm" novalidate>
-        <h3>Get your free check</h3>
-        <label>Your name<input name="name" autocomplete="name" required></label>
-        <label>WhatsApp number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210" required></label>
-        <label>Institute name<input name="institute" autocomplete="organization" required></label>
-        <div class="pair">
-          <label>City<input name="city" list="cityList" autocomplete="off" placeholder="Start typing" required></label>
-          <label>State<select name="state" required><option value="">Choose</option></select></label>
-        </div>
-        <datalist id="cityList"></datalist>
-        <label>Number of students<select name="strength" required>
-          <option value="">Choose</option>
-          <option>Under 100</option>
-          <option>100 to 300</option>
-          <option>300 to 500</option>
-          <option>500+</option>
-        </select></label>
-        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <p class="lead-err" id="leadErr" role="alert" hidden></p>
-        <button class="btn btn-big" type="submit">Get my free check</button>
-        <p class="sub">We'll message you on WhatsApp for the question paper and 2 answer copies.</p>
-      </form>
-      <div class="lead-done" id="leadDone" tabindex="-1" hidden>
-        <h3>Thank you<span id="leadName"></span>.</h3>
-        <p>We'll message you on WhatsApp from PARTHU.AI shortly. Keep the question paper and 2 answer copies from one test ready.</p>
-      </div>
+    <section class="cta">
+      <a class="wa wa-big" data-where="cta_bottom" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20to%20send%202%20copies%20from%20my%20institute%20and%20see%20the%20PARTHU%20report." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send 2 copies on WhatsApp</a>
+      <div class="sub">Free check of 2 copies · Opens WhatsApp</div>
     </section>
     </div>
 
@@ -682,7 +641,7 @@
     <footer>
       <div class="foot-in">
         <div class="name">Mahendra Singh Shekhawat</div>
-        <div class="line">Free check of 2 copies. Payment and invoice only after you say yes.</div>
+        <div class="line">Free check of 2 copies on WhatsApp. Payment and invoice only after you say yes.</div>
         <div class="tag">Practice. Feedback. Real Growth.</div>
         <div class="legal"><a href="privacy.html">Privacy Policy</a></div>
       </div>
@@ -690,7 +649,6 @@
   </div>
 
   <script src="assets/proof.js"></script>
-  <script src="assets/cities.js"></script>
   <script>
     (function () {
       var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -929,75 +887,25 @@
         }
       } catch (e) {}
 
-      // Short source tag (campaign/ad) saved with every form lead, so the sheet shows where it came from.
+      // WhatsApp buttons: fire a Contact event and add a short source tag to the prefilled message,
+      // so every WhatsApp lead shows which campaign/ad it came from. Log it in the lead sheet.
       var ref = [src.utm_source, src.utm_campaign, src.utm_content].filter(Boolean).join('/') || 'direct';
       if (region === 'ae') ref += ', UAE';
-      [].slice.call(document.querySelectorAll('a.btn')).forEach(function (a) {
-        a.addEventListener('click', function () { sendEvent('OpenForm', null, 'open_form', { button: a.dataset.where }); });
-      });
-
-      // Lead form. Rows go to the "Website leads" tab of the PARTHU Leads Tracker sheet through a
-      // Google Apps Script web app (script kept in .claude/lead-form.gs, not published). Paste its /exec URL here.
-      var LEAD_URL = '';
-      var form = $('leadForm'), err = $('leadErr');
-
-      // City suggestions; picking a known city fills in its state (assets/cities.js).
-      var cityState = {}, places = window.PARTHU_CITIES || {};
-      Object.keys(places).forEach(function (st) {
-        form.state.appendChild(new Option(st, st));
-        places[st].forEach(function (c) {
-          cityState[c.toLowerCase()] = st;
-          var o = document.createElement('option');
-          o.value = c;
-          o.label = st;
-          $('cityList').appendChild(o);
+      [].slice.call(document.querySelectorAll('a.wa')).forEach(function (a) {
+        // Build the query by hand: wa.me wants %20 for spaces, not the '+' that URLSearchParams writes.
+        var url = new URL(a.href);
+        var text = url.searchParams.get('text') + ' (ref: ' + ref + ')';
+        a.href = url.origin + url.pathname + '?text=' + encodeURIComponent(text);
+        a.addEventListener('click', function () {
+          sendEvent('Contact', 'Contact', 'whatsapp_click', {
+            button: a.dataset.where || (a.classList.contains('wa-big') ? 'cta_bottom' : 'header'),
+            source: ref,
+            region: region
+          });
         });
       });
-      form.city.addEventListener('input', function () {
-        var st = cityState[form.city.value.trim().toLowerCase()];
-        if (st) { form.state.value = st; form.state.removeAttribute('aria-invalid'); }
-      });
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var bad = [].filter.call(form.querySelectorAll('[required]'), function (f) {
-          var ok = f.value.trim() !== '' && (f.name !== 'phone' || f.value.replace(/\D/g, '').length >= 10);
-          f.setAttribute('aria-invalid', ok ? 'false' : 'true');
-          return !ok;
-        });
-        if (bad.length) {
-          err.textContent = bad[0].name === 'phone' && bad[0].value.trim() ? 'Please enter a WhatsApp number with at least 10 digits.' : 'Please fill in the highlighted fields.';
-          err.hidden = false;
-          bad[0].focus();
-          return;
-        }
-        err.hidden = true;
-        if (form.website.value) return;
-        if (!LEAD_URL) { err.textContent = 'The form is not connected yet.'; err.hidden = false; return; }
-        var data = new URLSearchParams(new FormData(form));
-        data.delete('website');
-        data.set('ref', ref);
-        data.set('region', region);
-        var btn = form.querySelector('button');
-        btn.disabled = true;
-        btn.textContent = 'Sending…';
-        fetch(LEAD_URL, { method: 'POST', mode: 'no-cors', body: data }).then(function () {
-          // Lead for new campaigns; Contact keeps the live ad set's optimisation event firing.
-          if (window.fbq) { fbq('track', 'Lead', { source: ref }); fbq('track', 'Contact', { source: ref }); }
-          if (window.gtag) gtag('event', 'generate_lead', { source: ref, region: region });
-          $('leadName').textContent = ', ' + form.name.value.trim().split(' ')[0];
-          form.hidden = true;
-          $('leadDone').hidden = false;
-          $('leadDone').focus();
-        }).catch(function () {
-          btn.disabled = false;
-          btn.textContent = 'Get my free check';
-          err.textContent = 'That didn\u2019t go through. Please check your internet and try again.';
-          err.hidden = false;
-        });
-      });
-      form.addEventListener('input', function (e) { e.target.removeAttribute('aria-invalid'); });
 
-      // Engaged visitors: scrolled half the page, and reached the free-check offer.
+      // Engaged visitors: scrolled half the page, and reached the 2-copies offer.
       var halfSent = false;
       addEventListener('scroll', function () {
         if (halfSent) return;
