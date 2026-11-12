@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /inbox/
 
 Sitemap: https://www.parthuai.com/sitemap.xml
