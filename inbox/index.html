@@ -5,21 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>PARTHU Inbox</title>
-<script>
-  // Short, clean link to the team inbox. Email apps cannot add their own account to this link,
-  // so the inbox opens the same way it does when typed into the browser.
-  location.replace('https://script.google.com/macros/s/AKfycby8bEXnulkb0i50DEQN0e4QC6u-urMDyxv4k449tX8lxnmH-apBPl_gYOQ3kSIt2T5zMA/exec');
-</script>
 <style>
   body { margin: 0; font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; background: #f4f6fb; color: #13254a; }
   main { max-width: 360px; margin: 18vh auto 0; padding: 0 16px; text-align: center; }
-  a { display: inline-block; margin-top: 12px; padding: 12px 20px; border-radius: 8px; background: #13254a; color: #fff; text-decoration: none; }
+  button { margin-top: 12px; padding: 12px 20px; border: 0; border-radius: 8px; background: #13254a; color: #fff; font: inherit; cursor: pointer; }
 </style>
+<script>
+  // The PARTHU Inbox runs here, on parthuai.com, so phones never open a script.google.com page
+  // (that page breaks when a phone has more than one Google account). The page itself and all
+  // data come from the inbox Apps Script (deployment "PARTHU Inbox", Execute as Me, access Anyone);
+  // every data call carries the email-code sign-in token.
+  var EXEC = 'https://script.google.com/macros/s/AKfycby8bEXnulkb0i50DEQN0e4QC6u-urMDyxv4k449tX8lxnmH-apBPl_gYOQ3kSIt2T5zMA/exec';
+
+  // Stands in for google.script.run: each call becomes one POST to the Apps Script.
+  function inboxShim(EXEC) {
+    function runner() {
+      var ok = function () {}, bad = function (e) { alert(e.message || e); }, P, o = {
+        withSuccessHandler: function (f) { ok = f; return P; },
+        withFailureHandler: function (f) { bad = f; return P; } };
+      return P = new Proxy(o, { get: function (t, k) {
+        if (k in t) return t[k];
+        return function () {
+          var args = [].slice.call(arguments);
+          fetch(EXEC, { method: 'POST', credentials: 'omit', redirect: 'follow',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ inbox: 1, fn: k, args: args }) })
+            .then(function (r) { return r.json(); })
+            .then(function (j) { if (j.ok) ok(j.result); else bad(new Error(j.error)); })
+            .catch(function () { bad(new Error('Network problem. Check the internet and try again.')); });
+        };
+      } });
+    }
+    window.google = { script: { get run() { return runner(); } } };
+  }
+
+  function loadInbox() {
+    document.getElementById('msg').textContent = 'Opening the PARTHU Inbox…';
+    document.getElementById('retry').hidden = true;
+    fetch(EXEC + '?view=raw', { credentials: 'omit', redirect: 'follow' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (html) {
+        if (html.indexOf('PARTHU Inbox') < 0) throw new Error('bad page');
+        var head = '<meta name="viewport" content="width=device-width, initial-scale=1"><title>PARTHU Inbox</title>' +
+          '<script>(' + inboxShim.toString() + ')(' + JSON.stringify(EXEC) + ');<\/script>';
+        html = html.replace('<head>', '<head>' + head);
+        document.open(); document.write(html); document.close();
+      })
+      .catch(function () {
+        document.getElementById('msg').textContent = 'Could not open the inbox. Check the internet and try again.';
+        document.getElementById('retry').hidden = false;
+      });
+  }
+</script>
 </head>
 <body>
 <main>
-  <p>Opening the PARTHU Inbox…</p>
-  <a href="https://script.google.com/macros/s/AKfycby8bEXnulkb0i50DEQN0e4QC6u-urMDyxv4k449tX8lxnmH-apBPl_gYOQ3kSIt2T5zMA/exec">Open the inbox</a>
+  <p id="msg">Opening the PARTHU Inbox…</p>
+  <button id="retry" type="button" hidden onclick="loadInbox()">Try again</button>
 </main>
+<script>loadInbox();</script>
 </body>
 </html>
