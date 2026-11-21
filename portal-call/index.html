@@ -91,7 +91,14 @@
   .lead { font-size: 1.14rem; color: var(--muted); margin: 0; max-width: 58ch; }
 
   .hero { display: grid; gap: 28px; padding: 0 0 64px; align-items: start; }
-  @media (min-width: 940px) { .hero { grid-template-columns: 1.4fr .9fr; column-gap: 36px; } }
+  @media (min-width: 940px) {
+    .hero { grid-template-columns: 1.4fr .9fr; grid-template-rows: auto 1fr; column-gap: 36px; row-gap: 34px; }
+    .hero .ask { grid-column: 2; grid-row: 1 / 3; position: sticky; top: 18px; }
+    .hero .covers { grid-column: 1; grid-row: 2; }
+  }
+  /* what the call covers, sitting under the video */
+  .covers h2 { font-size: 1.55rem; line-height: 1.1; margin-bottom: 4px; }
+  .covers > p { margin: 0 0 14px; color: var(--muted); }
 
   .video {
     position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; cursor: pointer;
@@ -178,6 +185,8 @@
   section.block { padding: 64px 0; border-top: 1px solid var(--line); }
   h2.sec { font-size: clamp(1.9rem, 5.4vw, 3rem); line-height: 1.04; margin-bottom: 12px; }
   .sec-say { color: var(--muted); margin: 0 0 30px; max-width: 54ch; }
+  .center { text-align: center; }
+  .center .sec-say { margin-left: auto; margin-right: auto; }
 
   /* tiles: the student's side and the owner's side */
   .tiles { display: grid; gap: 14px; }
@@ -191,7 +200,14 @@
   .tile p { margin: 0; }
   .t-phones { background: var(--panel); border: 1px solid var(--line); padding-bottom: 0; }
   .t-phones p { color: var(--muted); max-width: 40ch; }
-  .t-phones .open { display: inline-block; margin-top: 12px; font-weight: 500; }
+  .t-phones .open {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 0; cursor: pointer;
+    font: 500 1rem/1.3 var(--f-body); color: var(--text); background: none; border: 0;
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+  }
+  .t-phones .open svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .t-phones .open:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+  .gate-note { display: block; margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: rgba(255, 111, 46, .14); color: #ffc6a8; font-size: .95rem; }
   .pick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
   .pick button {
     font: 600 .98rem/1 var(--f-body); color: var(--text); background: transparent; cursor: pointer;
@@ -205,7 +221,10 @@
   .mock { position: absolute; inset: 0; background: #f7f7f4; }
   .phones { display: flex; justify-content: center; align-items: flex-end; gap: 4%; margin-top: 26px; }
   .phone { width: 46%; max-width: 250px; aspect-ratio: 9 / 17.6; border-radius: 26px 26px 0 0; padding: 7px 7px 0; background: #2b2a26; border: 1px solid #45443d; border-bottom: 0; }
-  .phone:first-child { margin-bottom: -34px; }
+  .mock-head { display: flex; align-items: center; gap: 3.5cqw; }
+  .mock-head .av { flex: none; width: 12cqw; height: 12cqw; border-radius: 50%; display: grid; place-items: center; background: var(--blue); color: #fff; font: 700 4.6cqw/1 var(--f-head); }
+  .mock-head b { font-size: 6cqw; }
+  .mock-head i { display: block; font-size: 3.8cqw; line-height: 1.3; }
   .screen { width: 100%; height: 100%; border-radius: 20px 20px 0 0; overflow: hidden; background: #f7f7f4; position: relative; container-type: inline-size; }
   .screen iframe { width: 390px; height: 1200px; border: 0; display: block; transform-origin: 0 0; pointer-events: none; }
   /* second phone: the verify step, drawn here so it stays sharp at any size */
@@ -218,7 +237,14 @@
   .otp .boxes span { border: 1.5px solid #1c1c1a; border-radius: 3cqw; text-align: center; padding: 3cqw 0; font: 700 7cqw/1 var(--f-head); background: #fff; }
   .otp .go { background: var(--blue); color: #fff; text-align: center; border-radius: 99px; padding: 4cqw; font-weight: 600; }
 
-  .t-leads { background: var(--blue); color: #fff; }
+  .t-leads { background: var(--blue); color: #fff; display: flex; flex-direction: column; }
+  .t-leads .rows { flex: 1; }
+  .blast {
+    display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 14px 16px;
+    border-radius: 16px; background: rgba(11, 11, 10, .28); color: #fff; font-weight: 600; line-height: 1.3;
+  }
+  .blast svg { flex: none; width: 26px; height: 26px; fill: #fff; }
+  .blast small { display: block; font-weight: 400; color: #dfe4ff; font-size: .86rem; }
   .t-leads p { color: #dfe4ff; }
   .rows { list-style: none; margin: 18px 0 10px; padding: 0; }
   .rows li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, .28); font-variant-numeric: tabular-nums; }
@@ -227,10 +253,17 @@
   .rows .v { grid-row: 1 / 3; grid-column: 2; align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: .86rem; font-weight: 600; color: #fff; }
   .rows .v svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   .sample { font-size: .8rem; color: #dfe4ff; }
-  .t-fact { background: var(--sage); color: var(--sage-ink); display: grid; align-content: end; min-height: 190px; }
+  .t-fact, .t-price { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+  @media (min-width: 860px) { .t-fact, .t-price { min-height: 230px; } }
+  .t-fact { background: var(--sage); color: var(--sage-ink); }
   .t-fact p { color: #36431a; }
-  .t-price { background: var(--orange); color: var(--orange-ink); display: grid; align-content: end; min-height: 190px; }
-  .t-price h3 { font-size: 2.3rem; font-variant-numeric: tabular-nums; }
+  .t-fact h3, .t-price h3 { font-size: 1.35rem; }
+  .t-fact .otp-art { display: flex; gap: 7px; }
+  .t-fact .otp-art span { width: 38px; height: 46px; border-radius: 10px; border: 2px solid var(--sage-ink); display: grid; place-items: center; font: 700 1.35rem/1 var(--f-head); background: #e6f0c4; }
+  .t-fact .otp-art span:last-child { background: var(--sage-ink); color: var(--sage); }
+  .t-price { background: var(--orange); color: var(--orange-ink); }
+  .t-price .amt { font: 800 3rem/1 var(--f-head); font-stretch: 112%; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .t-price .amt small { display: block; margin-top: 6px; font: 600 .95rem/1.2 var(--f-body); letter-spacing: 0; }
   .t-price p { color: #45200c; }
 
   /* the call */
@@ -288,11 +321,31 @@
           </div>
         </div>
 
+        <div class="covers">
+          <h2>What we cover on the call</h2>
+          <p>A short call about your coaching. You leave knowing whether a portal makes sense for you.</p>
+          <ul class="agenda">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>
+              <div><b>The free material you already have</b><span>Tests, notes, solutions, videos. We see what can go on your portal as it is.</span></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>
+              <div><b>A live portal, shown to you</b><span>We open a real portal and show how a student downloads and how the lead reaches you.</span></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>
+              <div><b>Your cost and next step</b><span>What your portal will cost and what we need from you to build it in your coaching's name.</span></div>
+            </li>
+          </ul>
+        </div>
+
         <div class="ask">
           <div class="card" id="form">
             <form id="leadForm" novalidate>
               <h2>Book a strategy call</h2>
               <p class="sub">Fill in 4 details. Our team will message you on WhatsApp to fix a time.</p>
+              <p class="gate-note" id="gateNote" hidden>Fill in these details and the live portal opens right after.</p>
               <div class="fields">
                 <label>Your name
                   <input name="name" autocomplete="name" required>
@@ -328,7 +381,7 @@
               <h2>Thank you<span id="leadName"></span>!</h2>
               <p class="sub">Your request is with us. Our team will message you on WhatsApp to fix a time for the call. Till then, try the real portal yourself.</p>
               <div class="row">
-                <a class="btn" href="https://camahendrashekhawat.com/resources/" target="_blank" rel="noopener">Try the live sample portal</a>
+                <a class="btn" id="liveBtn" href="https://camahendrashekhawat.com/resources/" target="_blank" rel="noopener">Open the live portal</a>
                 <a class="btn wa" id="waBtn" href="https://wa.me/919216652471?text=Hi%2C%20I%20want%20a%20strategy%20call%20about%20a%20resource%20portal%20for%20my%20coaching." target="_blank" rel="noopener">Chat on WhatsApp now</a>
               </div>
             </div>
@@ -337,25 +390,25 @@
       </div>
 
       <section class="block">
-        <h2 class="sec">One portal, two sides.</h2>
-        <p class="sec-say">The student gets free tests and solutions. You get to know who they are.</p>
+        <div class="center">
+          <h2 class="sec">One portal, two sides.</h2>
+          <p class="sec-say">The student gets free tests and solutions. You get to know who they are.</p>
+        </div>
         <div class="tiles">
           <div class="tile t-phones">
             <h3>The student's side</h3>
             <p>A real, working portal. They pick a course, a subject and a test, then verify themselves to download.</p>
-            <a class="open" href="https://camahendrashekhawat.com/resources/" target="_blank" rel="noopener">Open CA Mahendra Sir's live portal</a>
+            <button class="open gate" type="button">Try the live portal yourself <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
             <div class="pick" role="group" aria-label="Choose a stream to preview">
               <button type="button" data-stream="commerce" aria-pressed="true">Commerce</button>
               <button type="button" data-stream="science" aria-pressed="false">Science</button>
-              <button type="button" data-stream="humanities" aria-pressed="false">Humanities</button>
             </div>
             <p class="pick-note" id="pickNote">Showing CA Mahendra Sir's live Commerce portal.</p>
             <div class="phones" aria-hidden="true">
               <div class="phone"><div class="screen" id="liveScreen">
                 <iframe src="https://camahendrashekhawat.com/resources/" title="" loading="lazy" tabindex="-1" scrolling="no"></iframe>
                 <div class="otp mock" id="mock" hidden>
-                  <b>Your Coaching Name</b>
-                  <i>Free tests, notes and solutions</i>
+                  <div class="mock-head"><span class="av">PR</span><div><b>Dr. Priyanka Rathore</b><i>Free chapter tests, sample papers and solutions</i></div></div>
                   <div class="f"><small>Course</small><span id="mCourse"></span></div>
                   <div class="f"><small>Subject</small><span id="mSubject"></span></div>
                   <div class="f"><small>Resource</small>Chapter-wise test</div>
@@ -383,47 +436,32 @@
             <ul class="rows">
               <li><b>Student one</b><span>CA Foundation · Ajmer · 98••• ••321</span><i class="v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>OTP verified</i></li>
               <li><b>Student two</b><span>Class 12 Commerce · Kishangarh · 97••• ••504</span><i class="v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>OTP verified</i></li>
-              <li><b>Student three</b><span>Class 11 Commerce · Beawar · 90••• ••118</span><i class="v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>OTP verified</i></li>
+              <li><b>Student three</b><span>Class 12 Science · Beawar · 90••• ••118</span><i class="v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>OTP verified</i></li>
+              <li><b>Student four</b><span>Class 11 Commerce · Nasirabad · 94••• ••276</span><i class="v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>OTP verified</i></li>
             </ul>
             <p class="sample">Sample rows, not real students.</p>
+            <div class="blast">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg>
+              <span>One WhatsApp message to all of them<small>When a new batch opens, everyone on the list hears first.</small></span>
+            </div>
           </div>
 
           <div class="tile t-fact">
-            <h3>Only verified numbers</h3>
-            <p>Each student verifies by OTP before a download opens.</p>
+            <div class="otp-art" aria-hidden="true"><span>4</span><span>8</span><span>2</span><span>1</span></div>
+            <div>
+              <h3>Only verified numbers</h3>
+              <p>Each student verifies by OTP before a download opens.</p>
+            </div>
           </div>
           <div class="tile t-price">
-            <h3>₹7,500</h3>
-            <p>Starting price, one time. In your coaching's name and logo.</p>
+            <div class="amt">₹7,500<small>starting price, one time</small></div>
+            <p>Your coaching's name and logo on the portal.</p>
           </div>
         </div>
       </section>
 
       <section class="block">
-        <div class="call">
-          <div>
-            <h2 class="sec">What we cover on the call.</h2>
-            <p class="sec-say">A short call about your coaching. You leave knowing whether a portal makes sense for you.</p>
-          </div>
-          <ul class="agenda">
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>
-              <div><b>The free material you already have</b><span>Tests, notes, solutions, videos. We see what can go on your portal as it is.</span></div>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>
-              <div><b>A live portal, shown to you</b><span>We open CA Mahendra Sir's portal and show how a student downloads and how the lead reaches you.</span></div>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 6.5"/></svg>
-              <div><b>Your cost and next step</b><span>What your portal will cost and what we need from you to build it in your coaching's name.</span></div>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="block">
-        <h2 class="sec" style="margin-bottom:30px">Three wins from one portal.</h2>
+        <h2 class="sec center" style="margin-bottom:34px">Three wins from one portal.</h2>
         <div class="wins">
           <div>
             <h3>Your free resources, your name</h3>
@@ -447,7 +485,7 @@
         </div>
         <div class="row">
           <a class="btn dark" href="#form">Book a strategy call <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn line" href="https://camahendrashekhawat.com/resources/" target="_blank" rel="noopener">See a live portal</a>
+          <button class="btn line gate" type="button">Try the live portal</button>
         </div>
       </div>
     </main>
@@ -488,11 +526,23 @@
   fit();
   if (window.ResizeObserver) new ResizeObserver(fit).observe(live); else window.addEventListener('resize', fit);
 
-  // Stream picker: Commerce shows the live portal; the other two show a sample screen for that stream.
+  // Stream picker: Commerce shows the live portal; Science shows a sample screen in Dr. Priyanka Rathore's name.
   var STREAMS = {
-    science: { course: 'Class 12 Science', subject: 'Physics', chapter: 'Electrostatics · Test 1', note: 'Sample screen: how a Science portal would look.' },
-    humanities: { course: 'Class 12 Humanities', subject: 'Political Science', chapter: 'The Cold War Era · Test 1', note: 'Sample screen: how a Humanities portal would look.' }
+    science: { course: 'Class 12 Science', subject: 'Biology', chapter: 'Human Reproduction · Test 1', note: 'Sample screen: a Science portal in Dr. Priyanka Rathore’s name.' }
   };
+
+  // The live portal opens only after the visitor shares their details.
+  var PORTAL = 'https://camahendrashekhawat.com/resources/';
+  function booked() { try { return !!localStorage.getItem(KEY); } catch (e) { return false; } }
+  [].forEach.call(document.querySelectorAll('.gate'), function (b) {
+    b.addEventListener('click', function () {
+      if (window.cmsTrack) window.cmsTrack('portal_gate', { page: 'portal-call', open: booked() });
+      if (booked()) { window.open(PORTAL, '_blank', 'noopener'); return; }
+      $('gateNote').hidden = false;
+      $('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(function () { form.name.focus({ preventScroll: true }); }, 450);
+    });
+  });
   [].forEach.call(document.querySelectorAll('.pick button'), function (b) {
     b.addEventListener('click', function () {
       [].forEach.call(document.querySelectorAll('.pick button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
